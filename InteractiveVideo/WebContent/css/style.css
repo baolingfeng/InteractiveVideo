@@ -1,0 +1,408 @@
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+
+#main{
+	background:rgba(201, 201, 201, 0.25) none repeat scroll 0% 0%;
+}
+
+#video_content {
+    margin: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#toolbar {
+	margin: auto;
+    padding: 5px;
+    text-align: center;
+    background: white;
+}
+
+#intro{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px;
+    padding: 5px;
+    background:white;
+}
+
+#title {
+	font-size: 22px;
+	width: 100%;
+}
+
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+    position: relative; 
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+}
+
+ 
+/* th {
+  color:#D5DDE5;;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:15px;
+  font-weight: 100;
+  padding:10px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+} */
+table#tbl_events {
+	 border: 1px solid rgb(185, 46, 237);
+	 font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+     border-collapse: collapse;
+     width: 100%;
+}
+
+table#tbl_events tr {
+  color: black;
+  font-size:12px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+table#tbl_events tr:hover {
+  background-color: lightyellow;
+}
+
+table#tbl_events td {
+  padding-top:0px;
+  padding-bottom:0px;
+  text-align:center;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:16px;
+  border: 1px solid #ddd;
+  padding: 4px;
+}
+
+.trodd {
+	background:#EBEBEB;
+}
+
+.treven {
+	background: #FFFFFF;
+}
+
+/*
+#tbl_events tr:nth-child(odd) td {
+  background:#EBEBEB;
+}
+*/
+
+
+ 
+/* tr:hover td {
+  background:#4E5066;
+  color:#FFFFFF;
+  border-top: 1px solid #22262e;
+  border-bottom: 1px solid #22262e;
+} 
+ 
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}*/
+
+ 
+/* tr:nth-child(odd):hover td {
+  background:#4E5066;
+} */
+
+.import {
+	color: #a82ee7;
+	font-weight: bold;
+}
+
+.api{
+  font-style: italic;
+  color: #E64D16;
+}
+
+.exception{
+	color: #8181f9;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.fieldtype {
+	color: blue;
+	font-weight:bold;
+}
+
+.importtype{
+	color: #bd2208;
+	font-weight:bold;
+}
+
+.apicalltype{
+	color: #08bdb0;
+	font-weight:bold;
+}
+
+.variabletype{
+	color: #999898;
+	font-weight:bold;
+}
+
+.file{
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.opadd {
+	color: green;
+	font-weight: bold;
+}
+
+.opdelete {
+	text-decoration: line-through;
+	color: red;
+	font-weight: bold;
+}
+
+.hiddendiv{
+	visibility: hidden;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	height: 0px;
+}
+
+ /* The side navigation menu */
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    right: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* Position and style the close button (top right corner) */
+.closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px !important;
+    margin-right: 50px;
+    color: white;
+}
+
+.searchbox{
+	border: 1px, #000000;
+	font-family: Verdana,sans-serif;
+	font-feature-settings: normal;
+	font-kerning: auto;
+	font-language-override: normal;
+	font-size: 18px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	font-style: normal;
+	font-synthesis: weight style;
+	font-variant: normal;
+	font-variant-alternates: normal;
+	font-variant-caps: normal;
+	font-variant-east-asian: normal;
+	font-variant-ligatures: normal;
+	font-variant-numeric: normal;
+	font-variant-position: normal;
+	font-weight: 400;
+	line-height: 22.5px;
+	margin-bottom: 16px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	outline-color: rgb(255, 255, 255);
+	outline-style: none;
+	outline-width: 0px;
+	padding-bottom: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8px;
+	text-decoration: none;
+	text-decoration-color: rgb(255, 255, 255);
+	text-decoration-line: none;
+	text-decoration-style: solid;
+	text-transform: none;
+	transition-delay: 0s, 0s, 0s, 0s;
+	transition-duration: 0.3s, 0.15s, 0.3s, 0.3s;
+	transition-property: background-color, color, box-shadow, opacity;
+	transition-timing-function: ease, ease, ease, ease;
+	vertical-align: middle;
+	width: 400px;
+}
+
+.openbtn{
+	background-color: rgb(76, 175, 80);
+	border-bottom-color: rgb(255, 255, 255);
+	border-bottom-style: none;
+	border-bottom-width: 0px;
+	border-image-outset: 0 0 0 0;
+	border-image-repeat: stretch stretch;
+	border-image-slice: 100% 100% 100% 100%;
+	border-image-source: none;
+	border-image-width: 1 1 1 1;
+	border-left-color: rgb(255, 255, 255);
+	border-left-style: none;
+	border-left-width: 0px;
+	border-right-color: rgb(255, 255, 255);
+	border-right-style: none;
+	border-right-width: 0px;
+	border-top-color: rgb(255, 255, 255);
+	border-top-style: none;
+	border-top-width: 0px;
+	box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px 0px, rgba(0, 0, 0, 0.24) 0px 1px 2px 0px;
+	box-sizing: border-box;
+	color: rgb(255, 255, 255);
+	cursor: pointer;
+	display: inline-block;
+	font-family: Verdana,sans-serif;
+	font-feature-settings: normal;
+	font-kerning: auto;
+	font-language-override: normal;
+	font-size: 15px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	font-style: normal;
+	font-synthesis: weight style;
+	font-variant: normal;
+	font-variant-alternates: normal;
+	font-variant-caps: normal;
+	font-variant-east-asian: normal;
+	font-variant-ligatures: normal;
+	font-variant-numeric: normal;
+	font-variant-position: normal;
+	font-weight: 400;
+	line-height: 22.5px;
+	margin-bottom: 16px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	outline-color: rgb(255, 255, 255);
+	outline-style: none;
+	outline-width: 0px;
+	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	padding-bottom: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8px;
+	text-align: center;
+	text-decoration: none;
+	text-decoration-color: rgb(255, 255, 255);
+	text-decoration-line: none;
+	text-decoration-style: solid;
+	text-transform: none;
+	transition-delay: 0s, 0s, 0s, 0s;
+	transition-duration: 0.3s, 0.15s, 0.3s, 0.3s;
+	transition-property: background-color, color, box-shadow, opacity;
+	transition-timing-function: ease, ease, ease, ease;
+	vertical-align: middle;
+	white-space: nowrap;
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	-moz-user-select: none;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+.mydialog{
+	background-color: rgb(245, 245, 245);
+	border-bottom-color: rgb(227, 227, 227);
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-image-outset: 0 0 0 0;
+	border-image-repeat: stretch stretch;
+	border-image-slice: 100% 100% 100% 100%;
+	border-image-source: none;
+	border-image-width: 1 1 1 1;
+	border-left-color: rgb(227, 227, 227);
+	border-left-style: solid;
+	border-left-width: 2px;
+	border-right-color: rgb(227, 227, 227);
+	border-right-style: solid;
+	border-right-width: 2px;
+	border-top-color: rgb(227, 227, 227);
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-top-style: solid;
+	border-top-width: 2px;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 0px;
+	box-sizing: border-box;
+	color: rgb(51, 51, 51);
+	display: inline-block;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
+	max-width: 900px;
+	min-height: 20px;
+	opacity: 1;
+	outline-color: rgb(51, 51, 51);
+	outline-style: none;
+	outline-width: 0px;
+	padding-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+	position: relative;
+	text-alignleftvertical-align: middle;
+	visibility: visible;
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+}
+
+  #feedback { font-size: 1.4em; }
+  #api_list .ui-selecting { background: #FECA40; }
+  #api_list .ui-selected { background: #F39814; color: white; }
+  #api_list { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #api_list li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; width: 800px;}
+  
+  #result_list .ui-selecting { background: #FECA40; }
+  #result_list .ui-selected { background: #F39814; color: white; }
+  #result_list { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #result_list li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; width: 800px;}

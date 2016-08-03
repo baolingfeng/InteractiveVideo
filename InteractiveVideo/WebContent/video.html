@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Interactive Video</title>
+<link rel="stylesheet" media="all" href="css/style.css" />
+<link href="js/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="js/codemirror.css" /> 	
+<link rel="stylesheet" href="js/jquery-ui.min.css">
+
+<style>
+#header {
+    background-color:black;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+
+
+
+#video_content {
+    margin: auto;
+    width: 75%;
+    padding: 5px;
+}
+
+#title {
+	font-size: 22px;
+	padding: 5px;
+	width: 100%;
+	text-align: center;
+}
+
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+    position: relative; 
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+}
+</style>
+
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/jquery.contextMenu.js" type="text/javascript"></script>
+<script src="js/jquery.ui.position.min.js" type="text/javascript"></script>
+<script src="js/main.js" type="text/javascript"></script>
+<script src="js/codemirror.js"></script>
+<script src="js/clike.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery.popupoverlay.js"></script>
+
+</head>
+<body>
+
+<div id="main">
+	<div id="header">
+	<h1>Interactive Tutorial Video</h1>
+	</div>
+	
+	<div id="title">An Example of Java Email Program</div>
+	
+	<div id="video_content">
+		<video id ="v"  controls>
+			<source src="data/plugin/2016-07-30_15-13-38.mp4" type="video/mp4">
+		   	Your browser does not support the video tag.
+		</video>
+	</div>
+	
+	<div style="width: 100%; text-align: center">
+		<span><input class="searchbox" type="text" name="searchbox" placeholder="search code element" value=""/></span>
+		<span class="openbtn" onclick="openNav()">Show Code Timeline</span>
+		<span class="openbtn" onclick="openNav2()">Show Code Content</span>
+	</div>
+	
+	<div id="search">
+		<div id="search_result"></div>
+	</div>
+	
+	<div id="popup">
+		<div id="APIHelp">loading...
+		</div>
+		<div style="text-align: right"><button class="popup_close" style="margin-top:8px;">Close</button></div>
+	</div>
+	
+</div>
+
+<div id="mySidenav" class="sidenav">
+	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+	  <div id="display" style="width: 100%; height: 90%; overflow-y: scroll;">
+	  	<table id="tbl_events" style="width: 100%">
+	  </table>
+	  </div>
+</div>
+
+<div id="mySidenav2" class="sidenav">
+	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
+	  <div id="filetabs" style="display:none;">
+		  <ul id="tabnames"></ul>
+	  </div>
+</div>
+
+
+<script>
+var origin_video_width = 1920;
+var origin_video_height = 1080;
+var scale = 0.75;
+var width = $(document).width();
+
+$(document).ready(function(){
+	console.log(width);
+	
+	$('#v').width(width * scale);
+	$('#v').height(origin_video_height * scale);
+	
+	$('#popup').popup();
+	$('#search').popup();
+	
+	var v = document.getElementById('v');
+	v.addEventListener("loadedmetadata", function() { 
+		track = this.addTextTrack("descriptions", "English", "en"); 
+		track.mode = "showing";
+	});
+	
+	$.ajax({
+		type: 'post',
+		contentType: "application/json",
+		url: '/InteractiveVideo/GetVideoData',
+		success: function(data){
+			events = data;
+			console.log(events);
+			for(var i=0; i<events.length; i++)
+	        {
+				$('#tbl_events').append(generateTR(events[i], i));
+	        }
+			
+			generateFileContent();
+			
+			$('.imgtd').on('click', 'img', function(){
+				var eventidx = $(this).parent().parent().attr('eventidx');
+				v.currentTime = events[eventidx].interval;
+			});
+			
+			$.contextMenu({
+				selector: '.import', 
+	            callback: function(key, options) {
+	                if(key == "javadoc")
+	                {
+	                	showJavadoc($(this).text(), '');
+	                }
+	                else
+	                {
+	                	
+	                }
+	                
+	            },
+	            items: {
+	                "javadoc": {name: "View API Documentation"},
+	                "stackoverflow": {name: "View Related Posts in StackOverflow"}
+	            }
+			});
+			
+			$.contextMenu({
+				selector: '.api', 
+	            callback: function(key, options) {
+	            	var cls = $(this).attr('import');
+	            	console.log(cls + '/' + $(this).text());
+	            	if(cls == undefined)
+	            	{
+	            		cls = '';
+	            	}
+	            	
+	                if(key == "javadoc")
+	                {
+	                	showJavadoc(cls, $(this).text());
+	                }
+	                else
+	                {
+	                	
+	                }
+	                
+	            },
+	            items: {
+	                "javadoc": {name: "View API Documentation"},
+	                "stackoverflow": {name: "View Related Posts in StackOverflow"}
+	            }
+			});
+		}
+	});
+	
+	var hIdx = -1;
+    var preHIdx = -1;
+    v.addEventListener('timeupdate', function(){
+        cw = v.clientWidth;
+        ch = v.clientHeight;
+        
+        $('#tbl_events tr').each(function(index){
+        	var t = $(this).attr('eventidx');
+        	
+        	if(v.currentTime < events[t].interval)
+        	{
+        		hIdx = index - 1;
+        		return false;
+        	}
+       	});
+        
+        tr = $('#tbl_events tr')[hIdx];
+    	while(hIdx >= 0)
+    	{
+    		if($(tr).find('.imgtd').length > 0) 
+    		{
+    			break;
+    		}
+    		
+    		hIdx--;
+    		tr = $('#tbl_events tr')[hIdx];
+    	}
+        
+        if(hIdx >= 0 && hIdx != preHIdx)
+        {
+        	highlight(hIdx);
+        	
+        	//$('#display').scrollTop(tr.offsetTop - 10);
+        	
+			var eventidx = $(tr).attr('eventidx');
+        	updateFiles(eventidx);
+        	
+        	console.log("indexes:" + hIdx + '/' + preHIdx + "/" + eventidx);
+        	
+        	removeHighlight(preHIdx);
+        	
+        	preHIdx = hIdx;
+        }
+        else if(hIdx < 0 && preHIdx >= 0)
+        {
+        	removeHighlight(preHIdx)
+        }
+    },false);
+    
+
+    $("[name='searchbox']").keypress(function(event) {
+    	if (event.which == 13) {
+            event.preventDefault();
+            console.log('query: ' + this.value);
+            
+            if(this.value.length <= 2)
+            {
+            	console.log("the length of query can not be less than 3");
+            	return;
+            }
+            
+            search(this.value);
+        }
+    });
+});
+
+function highlight(hIdx)
+{
+	if(hIdx < 0) return;
+	
+	tr = $('#tbl_events tr')[hIdx];
+	if($(tr).find('.imgtd').length <= 0) return;
+	
+	$(tr).css('background-color', 'yellow');
+	hIdx++;
+	tr = $('#tbl_events tr')[hIdx];
+	
+	while(hIdx < $('#tbl_events tr').length)
+	{
+		if($(tr).find('.imgtd').length > 0) 
+		{
+			break;
+		}
+		
+		$(tr).css('background-color', 'yellow');
+		hIdx++;
+		tr = $('#tbl_events tr')[hIdx];
+	}
+}
+
+
+</script>
+
+</body>
+</html>
