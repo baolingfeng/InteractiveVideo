@@ -636,19 +636,21 @@ function removeHighlight(hIdx)
 	}
 }
 
+var zoomInScale = 0.65;
 function openNav() {
-	$('#mySidenav').width('960px');
-	$('#main').css('margin-right', '960px');
+	var margin = screen_width * 0.5 + 'px';
+	$('#mySidenav').width(margin);
+	$('#main').css('margin-right', margin);
 	
 	var vw = $('#v').width();
 	var vh = $('#v').height();
 	
-	$('#v').width(origin_video_width * scale * 0.7);
-	$('#v').height(origin_video_height * scale * 0.7);
+	$('#v').width(origin_video_width * scale * zoomInScale);
+	$('#v').height(origin_video_height * scale * zoomInScale);
 	
-	$('#video_content').width(origin_video_width * scale * 0.7);
-	$('#toolbar').width(origin_video_width * scale * 0.7);
-	$('#intro').width(origin_video_width * scale * 0.7);
+	$('#video_content').width(origin_video_width * scale * zoomInScale);
+	$('#toolbar').width(origin_video_width * scale * zoomInScale);
+	$('#intro').width(origin_video_width * scale * zoomInScale);
 }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
@@ -665,18 +667,19 @@ function closeNav() {
 }
 
 function openNav2() {
-	$('#mySidenav2').width('960px');
-	$('#main').css('margin-right', '960px');
+	var margin = screen_width * 0.5 + 'px';
+	$('#mySidenav2').width(margin);
+	$('#main').css('margin-right', margin);
 	
 	var vw = $('#v').width();
 	var vh = $('#v').height();
 	
-	$('#v').width(origin_video_width * scale * 0.7);
-	$('#v').height(origin_video_height * scale * 0.7);
+	$('#v').width(origin_video_width * scale * zoomInScale);
+	$('#v').height(origin_video_height * scale * zoomInScale);
 	
-	$('#video_content').width(origin_video_width * scale * 0.7);
-	$('#toolbar').width(origin_video_width * scale * 0.7);
-	$('#intro').width(origin_video_width * scale * 0.7);
+	$('#video_content').width(origin_video_width * scale * zoomInScale);
+	$('#toolbar').width(origin_video_width * scale * zoomInScale);
+	$('#intro').width(origin_video_width * scale * zoomInScale);
 }
 
 function closeNav2() {
