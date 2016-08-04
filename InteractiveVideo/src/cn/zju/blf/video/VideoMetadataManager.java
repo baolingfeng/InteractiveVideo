@@ -32,6 +32,15 @@ public class VideoMetadataManager {
 		md2.setTitle("如何实现一个简单的Eclipse插件编辑器");
 		md2.setIntro("该程序主要包括一下功能<br/>1. 基本的编辑，保存和另存为功能；<br/>2. 文本长度统计功能，显示在Eclipse中的一个view上");
 		meta.put("plugin", md2);
+		
+		VideoMetadata md3 = new VideoMetadata();
+		md3.setLogFile("/data/mysql/log/log.db3");
+		md3.setVideo("data/mysql/2016-08-04_13-56-01.mp4");
+		md3.setStartTime("2016-08-04 13:44:57.000");
+		md3.setTitle("Java操作MySql数据库");
+		md3.setIntro("实现如何用Java操作MySql数据库，包括：<br/>1. 执行简单的sql查询语句；<br/>2. 用preparedstatment查询数据库；"
+				+ "<br/>3. 数据库插入并获得自增字段的值; <br/>4.如何调用存储过程。");
+		meta.put("mysql", md3);
 	}
 	
 	public void initVideoList()
