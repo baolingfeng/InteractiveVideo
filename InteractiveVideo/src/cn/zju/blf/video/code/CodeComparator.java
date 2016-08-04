@@ -110,6 +110,14 @@ public class CodeComparator {
 		Set<String> im2 = new HashSet<String>(c2.getImports());
 		Set<String> im3 = new HashSet<String>(im2);
 		
+		boolean flag = false;
+		if(im1.contains("org.eclipse.swt.widgets.FileDialog") 
+				)
+		{
+			System.out.println("diff with FileDialog");
+			flag = true;
+		}
+		
 		im2.removeAll(im1);
 		if(im2.size() != 0)
 		{
@@ -125,6 +133,11 @@ public class CodeComparator {
 		}
 		
 		//System.out.println(res);
+		
+		if(flag)
+		{
+			System.out.println("isEqual: " + isEqual);
+		}
 		
 		return isEqual;
 	}

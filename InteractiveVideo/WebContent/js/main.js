@@ -82,6 +82,8 @@ $(document).ready(function(){
 	            		cls = '';
 	            	}
 	            	
+	            	$('#search').popup('hide');
+	            	
 	                if(key == "javadoc")
 	                {
 	                	showJavadoc(cls, $(this).text(), "false");
@@ -558,6 +560,11 @@ function search(query)
 
 var api_javadocs = [];
 function showJavadoc(clsName, method, flag){
+	if($('#search').is(':visible'))
+	{
+		$('#search').popup('hide');
+	}
+	
 	$('#popup').popup('show');
 	
 	$('#APIHelp').html('loading...');

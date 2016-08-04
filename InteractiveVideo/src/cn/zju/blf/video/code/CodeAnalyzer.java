@@ -60,6 +60,12 @@ public class CodeAnalyzer {
 				{
 					//System.out.println(n.getName());
 					cp.addImports(n.getName().toString());
+					
+					if(n.getName().toString().equals("org.eclipse.swt.widgets.FileDialog"))
+					{
+						System.out.println("find import org.eclipse.swt.widgets.FileDialog");
+					}
+					
 					super.visit(n, arg);
 				}
 				
@@ -84,7 +90,7 @@ public class CodeAnalyzer {
 			return cp;
 		}catch(Exception e)
 		{
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 		return null;

@@ -27,6 +27,7 @@ public class JDTCodeAnalyzer {
 		parser.setKind(ASTParser.K_COMPILATION_UNIT);
 		 
 		final CompilationUnit cu = (CompilationUnit) parser.createAST(null);
+		if(cu == null) return null;
 		
 		CodePatch cp = new CodePatch();
 		
@@ -79,7 +80,14 @@ public class JDTCodeAnalyzer {
                 	
                 	public boolean visit(MethodInvocation n) {
                 		//System.out.println(n);
-                		cp.addMethodCall(n.getExpression().toString(), n.getName().toString());
+                		try
+                		{
+                			cp.addMethodCall(n.getExpression().toString(), n.getName().toString());
+                		}catch(Exception e)
+                		{
+                			System.out.println(e.getMessage());
+                		}
+                		
                 		
                 		return false;
                 	}
