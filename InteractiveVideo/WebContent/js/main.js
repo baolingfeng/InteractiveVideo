@@ -7,11 +7,15 @@ var fileEditor = {};
 
 var origin_video_width = 1920;
 var origin_video_height = 1080;
-var scale = 0.75;
-var width = $(document).width();
+
+var screen_width = screen.width;
+var screen_height = screen.height;
+
+var scale = 0.7 * screen_width/origin_video_width;
+
+console.log(origin_video_width + '/' + screen_width + '/' + scale);
 
 $(document).ready(function(){
-	console.log(width);
 	
 	$('#v').width(origin_video_width * scale);
 	$('#v').height(origin_video_height * scale);
@@ -639,8 +643,12 @@ function openNav() {
 	var vw = $('#v').width();
 	var vh = $('#v').height();
 	
-	$('#v').width(origin_video_width * 0.5);
-	$('#v').height(origin_video_height * 0.5);
+	$('#v').width(origin_video_width * scale * 0.7);
+	$('#v').height(origin_video_height * scale * 0.7);
+	
+	$('#video_content').width(origin_video_width * scale * 0.7);
+	$('#toolbar').width(origin_video_width * scale * 0.7);
+	$('#intro').width(origin_video_width * scale * 0.7);
 }
 
 /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
@@ -650,6 +658,10 @@ function closeNav() {
 	
 	$('#v').width(origin_video_width * scale);
 	$('#v').height(origin_video_height * scale);
+	
+	$('#video_content').width(origin_video_width * scale);
+	$('#toolbar').width(origin_video_width * scale);
+	$('#intro').width(origin_video_width * scale);
 }
 
 function openNav2() {
@@ -659,8 +671,12 @@ function openNav2() {
 	var vw = $('#v').width();
 	var vh = $('#v').height();
 	
-	$('#v').width(origin_video_width * 0.5);
-	$('#v').height(origin_video_height * 0.5);
+	$('#v').width(origin_video_width * scale * 0.7);
+	$('#v').height(origin_video_height * scale * 0.7);
+	
+	$('#video_content').width(origin_video_width * scale * 0.7);
+	$('#toolbar').width(origin_video_width * scale * 0.7);
+	$('#intro').width(origin_video_width * scale * 0.7);
 }
 
 function closeNav2() {
@@ -669,6 +685,10 @@ function closeNav2() {
 	
 	$('#v').width(origin_video_width * scale);
 	$('#v').height(origin_video_height * scale);
+	
+	$('#video_content').width(origin_video_width * scale);
+	$('#toolbar').width(origin_video_width * scale);
+	$('#intro').width(origin_video_width * scale);
 }
 
 function formatNumberLength(num, length) {

@@ -1,3 +1,7 @@
+html body{
+	background:rgba(201, 201, 201, 0.25) none repeat scroll 0% 0%;
+}
+
 #header {
     background-color:black;
     color:white;
@@ -5,9 +9,6 @@
     padding:5px;
 }
 
-#main{
-	background:rgba(201, 201, 201, 0.25) none repeat scroll 0% 0%;
-}
 
 #video_content {
     margin: auto;
@@ -28,6 +29,11 @@
 	margin-top: 5px;
     padding: 5px;
     background:white;
+}
+
+#intro_content{
+	font-size: 16px;
+	width: 100%;
 }
 
 #title {
