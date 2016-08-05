@@ -119,8 +119,8 @@ public class EventManager {
 			{
 				if(parentActionName.endsWith(".java"))
 				{
-					//CodePatch cp = CodeAnalyzer.parseJavaSource(e.getAction().getActionValue());
-					CodePatch cp = JDTCodeAnalyzer.parseJavaSource(e.getAction().getActionValue());
+					CodePatch cp = CodeAnalyzer.parseJavaSource(e.getAction().getActionValue());
+					//CodePatch cp = JDTCodeAnalyzer.parseJavaSource(e.getAction().getActionValue());
 					if(cp == null) continue;
 					
 					cp.setFileName(parentActionName);

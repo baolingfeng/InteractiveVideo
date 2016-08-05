@@ -1,6 +1,9 @@
 package cn.zju.blf.video.code;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,7 +42,15 @@ public class CodeAnalyzer {
 				@Override
 		        public void visit(final MethodCallExpr n, final Void arg){
 		            //System.out.println(n.getScope() + "/" + n.getName());
-					cp.addMethodCall(n.getScope().toString(), n.getName());
+					if(n.getScope() != null)
+					{
+						cp.addMethodCall(n.getScope().toString(), n.getName());
+					}
+					else
+					{
+						cp.addMethodCall("this", n.getName());
+					}
+					
 					
 		            super.visit(n, arg);
 		        }
@@ -61,11 +72,6 @@ public class CodeAnalyzer {
 					//System.out.println(n.getName());
 					cp.addImports(n.getName().toString());
 					
-					if(n.getName().toString().equals("org.eclipse.swt.widgets.FileDialog"))
-					{
-						System.out.println("find import org.eclipse.swt.widgets.FileDialog");
-					}
-					
 					super.visit(n, arg);
 				}
 				
@@ -79,23 +85,32 @@ public class CodeAnalyzer {
 					super.visit(n, arg);
 				}
 				
-				@Override
-				public void visit(final MethodDeclaration n, final Void arg)
-				{
-					//System.out.println(n.getName());
-					super.visit(n, arg);
-				}
 			}, null);
 			
 			return cp;
 		}catch(Exception e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		
 		return null;
 	}
 	
-	
+	public static void main(String[] args) throws Exception
+	{
+		File f = new File("c:/baolingfeng/java.txt");
+		BufferedReader br = new BufferedReader(new FileReader(f));
+		
+		String str = "";
+		String temp = null;
+		while((temp = br.readLine()) != null) 
+		{
+			str += temp;
+		}
+		
+		br.close();
+		
+		parseJavaSource(str);
+	}
 	
 }

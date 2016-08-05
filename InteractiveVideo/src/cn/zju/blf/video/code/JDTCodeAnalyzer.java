@@ -72,7 +72,6 @@ public class JDTCodeAnalyzer {
                         for(Object o: fs.fragments())
                         {
                         	VariableDeclarationFragment fd = (VariableDeclarationFragment)o;
-                        	System.out.println(fd.getName());
                         	cp.addVariable(fd.getName().toString(), type);
                         }
                         return false;
@@ -85,7 +84,7 @@ public class JDTCodeAnalyzer {
                 			cp.addMethodCall(n.getExpression().toString(), n.getName().toString());
                 		}catch(Exception e)
                 		{
-                			System.out.println(e.getMessage());
+                			System.out.println(e.getMessage() + ": " + n.getExpression()+ "/" + n.getName());
                 		}
                 		
                 		
