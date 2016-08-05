@@ -151,8 +151,6 @@ $(document).ready(function(){
         	removeHighlight(preHIdx)
         }
     },false);
-    
-    
 
     $("[name='searchbox']").keypress(function(event) {
     	if (event.which == 13) {
@@ -279,8 +277,6 @@ function generateTR(e, i)
 			if(j == 0)
 			{
 				str += '<tr class="' + trclass + '"';
-				//str += ' interval=' + e.interval;
-				//str += ' timestamp=' + e.timestamp;
 				str += ' eventidx=' + i + ">"
 				str += '<td class="imgtd" rowspan=' + len + '><img src="images/clock.png"/></td>';
 				str += '<td><span class="op' + operation + '">' + operation + '<span></td>';
@@ -339,7 +335,15 @@ function generateTR(e, i)
 		str += '<tr class="' + trclass + '"';
 		str += ' eventidx=' + i + ">"
 		str += '<td class="imgtd"><img src="images/clock.png"/></td>';
-		str += '<td colspan="2">Exception</td><td colspan="2">' + e.summary.console + '</td></tr>'
+		str += '<td colspan="2">Exception</td><td colspan="2">';
+		
+		var arr = e.summary.console.split(',');
+		for(var i=0; i<arr.length; i++)
+		{
+			str += '<span>' + arr[i] + '</span>';
+			str += '<br/>'
+		}
+		str += "</td></tr>";
 	}
 	
 	//console.log(cueStr);
@@ -514,6 +518,39 @@ function search(query)
 						expr += '<span class="' + type.toLowerCase() + 'type">' + type + '</span>&nbsp&nbsp';
 						expr += '<span>' + getExpressionHtml(arr[k], type) + '</span>';
 						res.push({'interval': e.interval, 'expr': expr});
+					}
+				}
+			}
+		}
+		else if(e.summary.hasOwnProperty('codepatch'))
+		{
+			var javefile = e.summary.codepatch.fileName;
+			if(javefile.toLowerCase().indexOf(query) >= 0)
+			{
+				var expr = 'Open Source Code File <span class="file">' + javefile + '</span>'
+				res.push({'interval': e.interval, 'expr': expr});
+			}
+		}
+		else if(e.summary.hasOwnProperty('normalfile'))
+		{
+			var fileName = e.summary.normalfile;
+			if(fileName.toLowerCase().indexOf(query) >= 0)
+			{
+				var expr = 'Open File <span class="file">' + fileName + '</span>'
+				res.push({'interval': e.interval, 'expr': expr});
+			}
+		}
+		else if(e.summary.hasOwnProperty('console'))
+		{
+			var consoleInfo = e.summary.console;
+			if(consoleInfo.toLowerCase().indexOf(query) >= 0)
+			{
+				arr = consoleInfo.split(',');
+				for(k=0; k<arr.length; k++)
+				{
+					if(arr[k].toLowerCase().indexOf(query) >= 0)
+					{
+						res.push({'interval': e.interval, 'expr': arr[k]});
 					}
 				}
 			}
