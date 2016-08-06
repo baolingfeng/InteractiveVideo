@@ -81,7 +81,10 @@ table.vtable td, th {
 	<tr>
 		<td><%=v%></td>
 		<td><%=VideoMetadataManager.getInstance().getTitle(v)%></td>
-		<td><a href="/InteractiveVideo/video.jsp?name=<%=v%>">view</a></td>
+		<td>
+			<a href="/InteractiveVideo/ViewVideo?name=<%=v%>&group=1">实验组</a>
+			<a href="/InteractiveVideo/ViewVideo?name=<%=v%>&group=2">对照组</a>
+		</td>
 	</tr>
 	<%}%>
 	</table>

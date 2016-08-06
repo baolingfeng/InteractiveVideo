@@ -30,8 +30,11 @@ $(document).ready(function(){
 	
 	var v = document.getElementById('v');
 	v.addEventListener("loadedmetadata", function() { 
-		track = this.addTextTrack("descriptions", "English", "en"); 
-		track.mode = "showing";
+		if(typeof(VTTCue) != "undefined")
+		{
+			track = this.addTextTrack("descriptions", "English", "en"); 
+			track.mode = "showing";
+		}
 	});
 	
 	$.ajax({
@@ -347,9 +350,12 @@ function generateTR(e, i)
 	}
 	
 	//console.log(cueStr);
-	var cue = new VTTCue(e.interval, e.interval + 3, cueStr);
-	cue.line = 1;
-	track.addCue(cue); 
+	if(typeof(VTTCue) != "undefined")
+	{
+		var cue = new VTTCue(e.interval, e.interval + 3, cueStr);
+		cue.line = 1;
+		track.addCue(cue); 
+	}
 	
 	return str;
 }

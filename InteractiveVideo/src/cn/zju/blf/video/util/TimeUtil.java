@@ -1,6 +1,9 @@
 package cn.zju.blf.video.util;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class TimeUtil {
 	public static double calcTimeDiff(String t1, String t2, String format)
@@ -14,6 +17,14 @@ public class TimeUtil {
 			e.printStackTrace();
 			return 0;
 		}
+	}
+	
+	public static String timeToStr(Date d, String format)
+	{
+		DateFormat df = new SimpleDateFormat(format);
+
+		return df.format(d);
+
 	}
 	
 	public static double calcTimeDiff(String t1, String t2)

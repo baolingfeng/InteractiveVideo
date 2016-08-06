@@ -1,0 +1,133 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="cn.zju.blf.video.VideoMetadataManager" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>问卷调查 - Java如何发送Email</title>
+</head>
+<link rel="stylesheet" href="css/questionnaire.css" />
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/questionnaire.js"></script>
+
+<%
+	String group = request.getParameter("group");
+	String videoName = request.getParameter("name");
+	
+	String groupName = "1".equals(group) ? "实验组" : "对照组";
+%>
+<script type="text/javascript">
+var group = <%=group%>
+var questionNumber = 8;
+
+var lastQestion = -1;
+
+$(document).ready(function(){
+	$("input[name=group][value=" + group + "]").attr('checked', 'checked');
+	
+	for(i=1; i<=questionNumber; i++)
+	{
+		$("input[name=q"+i+"]").prop('disabled', true);
+		
+		var type = $("input[name=q"+i+"]").prop('type');
+		if(type == "checkbox")
+		{
+			$("input[name=q"+i+"]").change(function() {
+				var t = createDateAsUTC(new Date()).toISOString().slice(0, 19); 
+				
+				if(lastQestion != this.name)
+				{
+					var qt = $("input[name="+this.name+"_time]").val();
+					if(qt != "") qt = qt + ",";
+					$("input[name="+this.name+"_time]").val(qt + t);
+				}
+				
+				lastQestion = this.name;
+			});
+		}
+		else if(type == "text")
+		{
+			$("input[name=q"+i+"]").focus(function(){
+				var t = createDateAsUTC(new Date()).toISOString().slice(0, 19); 
+				if(lastQestion != this.name)
+				{
+					var qt = $("input[name="+this.name+"_time]").val();
+					if(qt != "") qt = qt + ",";
+					$("input[name="+this.name+"_time]").val(qt + t);
+				}
+				
+				lastQestion = this.name;
+			});
+		}
+	}
+	
+	initQuestionnaire();
+});
+</script>
+<body>
+
+<div style="margin:auto; width:70%;">
+<form role="form" name="quizform" action="quiztest.asp?qtest=HTML" method="post">
+
+<div class="w3-padding-jumbo w3-light-grey">
+	<h2>
+	这个调查问卷是你需要观看<a href="/InteractiveVideo/ViewVideo?name=<%=videoName%>&group=<%=group%>" target="_blank"><%=VideoMetadataManager.getInstance().getTitle(videoName) %></a>的这个视频后完成
+	</h2>
+	<br/><br/>
+	<label class="w3-large">
+	视频简介：
+	</label>
+	<br/>
+	<label class="intro-text">
+	<%=VideoMetadataManager.getInstance().getIntro(videoName) %>
+	</label>
+	
+	<br/><br/>
+	<label class="w3-small italic-text">
+	参与这个实验有机会获得价值100元的京东券（如果想参加，请留下你的邮箱），非常感谢你的参与。
+	<br/>
+	<input class="underline-input w3-light-grey " name="useremail" size="100"></input>
+	<br/>
+	如果有问题，请联系鲍凌峰博士：lingfengbao@zju.edu.cn
+	</label>
+	<br/><br/>
+	
+</div>
+
+<div class="w3-padding-jumbo w3-light-grey">
+	<h2 style="margin-bottom:10px;">
+	你当前属于的实验组为：
+	<span class="italic-text"> <%=groupName %> </span>
+	<input name="group" value="<%=group %> " size="25" type="hidden">
+	</h2>
+</div>
+
+<div class="w3-padding-jumbo w3-light-grey">
+	<input id="controlBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 打开视频并开始答题 " type="button" onclick="startAnswer(questionNumber, this.value, '<%=videoName%>', '<%=group%>')">
+	
+	<span id="timecounter_span" class="w3-large" style="padding-left:50px; display: none;">持续时间：<label id="timecounter"></label></span>
+	
+	<input name="starttime" value="" type="hidden">
+</div>
+
+<div class="w3-padding-jumbo w3-light-grey hidden-text overall-warning">
+<h3 style="color: red;">所有问题都必须回答！</h3>
+</div>
+
+<%if("email".equals(videoName)){ %>
+	<%@include file="q_email.jsp"%>
+<%}else if("mysql".equals(videoName)){ %>
+	<%@include file="q_mysql.jsp"%>
+<%} %>
+
+<div class="w3-padding-jumbo w3-light-grey">
+	<input id="resetBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 回到顶部 " type="button" onclick="backToTop()">
+	<input id="resetBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 重新开始答题 " type="button" onclick="resetAnswer(questionNumber, '<%=videoName%>', '<%=group%>')">
+</div>
+
+</form>
+</div>
+</body>
+</html>

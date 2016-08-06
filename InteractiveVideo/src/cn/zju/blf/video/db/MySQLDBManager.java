@@ -58,52 +58,90 @@ public class MySQLDBManager {
 		}
 	}
 	
+	public void commit()
+	{
+		try
+		{
+			conn.commit();
+		}catch(Exception e)
+		{
+			logger.info(e);
+		}
+	}
+	
+	private void setPreparedStatement(PreparedStatement pstmt, Object... params) throws Exception
+	{
+		for(int i=0; i<params.length; i++)
+		{
+			Object o = params[i];
+			if(o instanceof Integer)
+			{
+				pstmt.setInt(i+1, (Integer)o);
+			}
+			else if(o instanceof Double)
+			{
+				pstmt.setDouble(i+1, (Double)o);
+			}
+			else if(o instanceof Float)
+			{
+				pstmt.setFloat(i+1, (Float)o);
+			}
+			else if(o instanceof String)
+			{
+				pstmt.setString(i+1, (String)o);
+			}
+			else if(o instanceof Boolean)
+			{
+				pstmt.setBoolean(i+1, (Boolean)o);
+			}
+			else if(o instanceof Date)
+			{
+				pstmt.setDate(i+1, (Date)o);
+			}
+			else if(o == null)
+			{
+				pstmt.setNull(i+1, Types.INTEGER);
+			}
+		}
+	}
+	
 	public void executeInsert(String sql, Object... params)
 	{
 		try
 		{
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
-			for(int i=0; i<params.length; i++)
-			{
-				Object o = params[i];
-				if(o instanceof Integer)
-				{
-					pstmt.setInt(i+1, (Integer)o);
-				}
-				else if(o instanceof Double)
-				{
-					pstmt.setDouble(i+1, (Double)o);
-				}
-				else if(o instanceof Float)
-				{
-					pstmt.setFloat(i+1, (Float)o);
-				}
-				else if(o instanceof String)
-				{
-					pstmt.setString(i+1, (String)o);
-				}
-				else if(o instanceof Boolean)
-				{
-					pstmt.setBoolean(i+1, (Boolean)o);
-				}
-				else if(o instanceof Date)
-				{
-					pstmt.setDate(i+1, (Date)o);
-				}
-				else if(o == null)
-				{
-					pstmt.setNull(i+1, Types.INTEGER);
-				}
-			}
+			setPreparedStatement(pstmt, params);
 			
 			pstmt.execute();
-			
-			//conn.commit();
 		}catch(Exception e)
 		{
 			System.out.println(e.getMessage());
 		}
+	}
+	
+	public int executeInsertWithAI(String sql, Object... params)
+	{
+		try
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			setPreparedStatement(pstmt, params);
+			
+			pstmt.executeUpdate();
+			
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next())
+			{
+				return rs.getInt(1);
+			}
+			
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		
+		return -1;
 	}
 	
 	public List<Map<String, Object>> executeQuery(String sql, Object... params)
@@ -112,38 +150,7 @@ public class MySQLDBManager {
 		{
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
-			for(int i=0; i<params.length; i++)
-			{
-				Object o = params[i];
-				if(o instanceof Integer)
-				{
-					pstmt.setInt(i+1, (Integer)o);
-				}
-				else if(o instanceof Double)
-				{
-					pstmt.setDouble(i+1, (Double)o);
-				}
-				else if(o instanceof Float)
-				{
-					pstmt.setFloat(i+1, (Float)o);
-				}
-				else if(o instanceof String)
-				{
-					pstmt.setString(i+1, (String)o);
-				}
-				else if(o instanceof Boolean)
-				{
-					pstmt.setBoolean(i+1, (Boolean)o);
-				}
-				else if(o instanceof Date)
-				{
-					pstmt.setDate(i+1, (Date)o);
-				}
-				else if(o == null)
-				{
-					pstmt.setNull(i+1, Types.INTEGER);
-				}
-			}
+			setPreparedStatement(pstmt, params);
 			
 			ResultSet rs = pstmt.executeQuery();
 			
