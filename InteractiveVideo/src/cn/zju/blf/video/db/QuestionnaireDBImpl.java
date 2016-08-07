@@ -80,6 +80,14 @@ public class QuestionnaireDBImpl {
 		//db.commit();
 	}
 	
+	public void insertRate(String recordId, String rate, String comment)
+	{
+		String sql2 = "insert into answers(record_id, question, answer, times) values(?, ? ,? ,?)";
+		
+		db.executeInsert(sql2, recordId, "rate", rate,  "");
+		db.executeInsert(sql2, recordId, "comment", comment,  "");
+	}
+	
 	public void close()
 	{
 		db.close();

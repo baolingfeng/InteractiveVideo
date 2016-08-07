@@ -127,10 +127,15 @@ function submitQuestionnaire(n, videoName, group)
 		else if(type == "text" || type == "textarea")
 		{
 			var inputValues = [];
+			var allNonEmpty = true;
 			$("input[name=q"+i+"]").each(function() {
 				if(this.value.trim() != "")
 				{
 					inputValues.push(this.value);
+				}
+				else
+				{
+					allNonEmpty = false;
 				}
 			});
 			
@@ -140,7 +145,8 @@ function submitQuestionnaire(n, videoName, group)
 				answers["q"+i+"_time"] = $("input[name=q"+i+"_time]").val();
 				$("span[name=q"+i+"_warning]").addClass("hidden-text");
 			}
-			else
+			
+			if(!allNonEmpty)
 			{
 				canSubmit = false;
 				$("span[name=q"+i+"_warning]").removeClass("hidden-text");
@@ -156,21 +162,24 @@ function submitQuestionnaire(n, videoName, group)
 			type: 'post',
 			url: '/InteractiveVideo/SubmitQuestionnaire',
 			data: {"answers": JSON.stringify(answers)},
+			beforeSend: function() {
+		       console.log("submitting...")
+		    },
 			success: function(d){
 				console.log(d);
 				
 				var r = confirm("提交成功");
 				
+				resetAnswer(n, videoName, group);
 				if(group == "1")
 				{
 					window.location = "rate.jsp?record=" + d;
 				}
-				else
-				{
-					resetAnswer(n, videoName, group);
-				}
-				
 				//closeWindow();
+			},
+			error: function(xhr, status, error) {
+				var err = eval("(" + xhr.responseText + ")");
+				alert(err.Message);
 			}
 		});
 	}
@@ -194,6 +203,33 @@ function startAnswer(n, button, videoName, group)
 		submitQuestionnaire(n, videoName, group);
 	}
 	
+}
+
+function submitRate(recordId)
+{
+	var rate = $("input[name='rate']:checked").val();
+	var comment = $("textarea[name='comment']").val();
+	
+	console.log(rate + "/" + comment);
+	$.ajax({
+		type: 'post',
+		url: '/InteractiveVideo/SubmitRate',
+		data: {'recordId': recordId, 'rate': rate, 'comment': comment},
+		beforeSend: function() {
+	       console.log("submitting rate.....")
+	    },
+		success: function(d){
+			console.log(d);
+			
+			var r = confirm("提交成功, 谢谢你的参与！");
+			
+			closeWindow();
+		},
+		error: function(xhr, status, error) {
+			var err = eval("(" + xhr.responseText + ")");
+			alert(err.Message);
+		}
+	});
 }
 
 function closeWindow()

@@ -9,11 +9,21 @@
 <script src="js/questionnaire.js"></script>
 
 <title>评价 - Interactive Video</title>
+
+<%
+	int recordId = -1;
+	try{
+		recordId = Integer.parseInt(request.getParameter("record"));
+	}catch(Exception e){}
+%>
+<script>
+var recordId = <%=recordId %>;
+</script>
 </head>
 <body>
 
 <div style="margin:auto; width:70%;">
-	<div class="qdiv w3-padding-jumbo">
+	<div class="qdiv w3-padding-jumbo w3-light-grey">
 		<p class="w3-large" style="margin-bottom:20px;">请对我们的工具进行评价？
 		<span name="q5_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span>
 		</p>
@@ -38,8 +48,14 @@
 		</div>
 	</div>
 	
+	<div class="qdiv w3-padding-jumbo w3-light-grey">
+		<label class="w3-large">如果你有什么意见或者建议，请告诉我们以便改进这个工具：</label>
+		<br/>
+		<textarea name="comment" rows="10" cols="70"></textarea>
+	</div>
+	
 	<div class="w3-padding-jumbo w3-light-grey">
-		<input id="controlBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 提交 " type="button" onclick="submitRate()">
+		<input id="controlBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 提交 " type="button" onclick="submitRate(recordId)">
 	</div>
 </div>
 </body>

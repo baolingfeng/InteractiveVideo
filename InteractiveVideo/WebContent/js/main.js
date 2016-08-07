@@ -54,6 +54,7 @@ $(document).ready(function(){
 			$('.imgtd').on('click', 'img', function(){
 				var eventidx = $(this).parent().parent().attr('eventidx');
 				v.currentTime = events[eventidx].interval;
+				v.pause();
 			});
 			
 			$.contextMenu({

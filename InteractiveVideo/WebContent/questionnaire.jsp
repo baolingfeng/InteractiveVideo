@@ -19,8 +19,18 @@
 	String groupName = "1".equals(group) ? "实验组" : "对照组";
 %>
 <script type="text/javascript">
-var group = <%=group%>
-var questionNumber = 8;
+var group = <%=group%>;
+var videoName = "<%=videoName%>";
+
+var questionNumber = -1;
+if(videoName == "email" || videoName == "mysql")
+{
+	questionNumber = 8;
+}
+else if(videoName == "plugin")
+{
+	questionNumber = 10;
+}
 
 var lastQestion = -1;
 
@@ -96,7 +106,7 @@ $(document).ready(function(){
 	
 </div>
 
-<div class="w3-padding-jumbo w3-light-grey">
+<div class="w3-padding-jumbo w3-light-grey hidden-text">
 	<h2 style="margin-bottom:10px;">
 	你当前属于的实验组为：
 	<span class="italic-text"> <%=groupName %> </span>
@@ -106,9 +116,7 @@ $(document).ready(function(){
 
 <div class="w3-padding-jumbo w3-light-grey">
 	<input id="controlBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 打开视频并开始答题 " type="button" onclick="startAnswer(questionNumber, this.value, '<%=videoName%>', '<%=group%>')">
-	
 	<span id="timecounter_span" class="w3-large" style="padding-left:50px; display: none;">持续时间：<label id="timecounter"></label></span>
-	
 	<input name="starttime" value="" type="hidden">
 </div>
 
@@ -120,6 +128,8 @@ $(document).ready(function(){
 	<%@include file="q_email.jsp"%>
 <%}else if("mysql".equals(videoName)){ %>
 	<%@include file="q_mysql.jsp"%>
+<%}else if("plugin".equals(videoName)){ %>
+	<%@include file="q_plugin.jsp"%>
 <%} %>
 
 <div class="w3-padding-jumbo w3-light-grey">
