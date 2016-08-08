@@ -120,6 +120,21 @@ public class MySQLDBManager {
 		}
 	}
 	
+	public void executeUpdate(String sql, Object... params)
+	{
+		try
+		{
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			setPreparedStatement(pstmt, params);
+			
+			pstmt.executeUpdate();
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	public int executeInsertWithAI(String sql, Object... params)
 	{
 		try

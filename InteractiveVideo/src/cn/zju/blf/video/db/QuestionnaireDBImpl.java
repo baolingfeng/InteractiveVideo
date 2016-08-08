@@ -56,15 +56,15 @@ public class QuestionnaireDBImpl {
 	public int insertRecord(JSONObject jsonObj)
 	{
 		String host = jsonObj.getString("host");
-		String email = jsonObj.getString("email");
+		//String email = jsonObj.getString("email");
 		String starttime = jsonObj.getString("starttime");
 		String endtime = jsonObj.getString("endtime");
 		String group = jsonObj.getString("group");
 		String video = jsonObj.getString("video");
 		
-		String sql = "insert into records(host, email, starttime, endtime, egroup, video) values(?, ?, ?, ?, ?, ?)";
+		String sql = "insert into records(host, starttime, endtime, egroup, video) values(?, ?, ?, ?, ?)";
 		
-		int recordId = db.executeInsertWithAI(sql, host, email, starttime, endtime, group, video);
+		int recordId = db.executeInsertWithAI(sql, host, starttime, endtime, group, video);
 		
 		String sql2 = "insert into answers(record_id, question, answer, times) values(?, ? ,? ,?)";
 		int qnumber = (Integer)jsonObj.get("qnumber");
@@ -78,6 +78,13 @@ public class QuestionnaireDBImpl {
 		
 		return recordId;
 		//db.commit();
+	}
+	
+	public void updateEmail(String recordId, String email)
+	{
+		String sql = "update records set email=? where id = ?";
+		
+		db.executeUpdate(sql, email, recordId);
 	}
 	
 	public void insertRate(String recordId, String rate, String comment)

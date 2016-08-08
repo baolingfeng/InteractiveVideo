@@ -29,7 +29,7 @@
 
 <div class="qdiv w3-padding-jumbo disable-text">
 	<p class="w3-large" style="margin-bottom:20px;">2. 视频中Properties类中设置的smtp的端口是
-		<input class="underline-input w3-light-grey " name="q2"></input>?
+		<input class="underline-input w3-light-grey " name="q2" placeholder="请在此输入"></input>?
 	<span name="q2_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span>
 	</p>
 	<input name="qnumber" value="2" size="25" type="hidden">
@@ -43,22 +43,22 @@
 	<input name="qnumber" value="3" size="25" type="hidden">
 	<input name="q3_time" value="" size="25" type="hidden">
 	<div class="radio">
-		<label class="w3-large"><input name="q3" id="1" value="1" type="checkbox"> new Session(Properties)</label>
+		<label class="w3-large"><input name="q3" id="1" value="1" type="radio"> new Session(Properties)</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q3" id="2" value="2" type="checkbox"> new Session(Properties, Authenticator)</label>
+		<label class="w3-large"><input name="q3" id="2" value="2" type="radio"> new Session(Properties, Authenticator)</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q3" id="3" value="3" type="checkbox"> Session.getInstance(Properties)</label>
+		<label class="w3-large"><input name="q3" id="3" value="3" type="radio"> Session.getInstance(Properties)</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q3" id="4" value="4" type="checkbox"> Session.getInstance(Properties,  Authenticator)</label>
+		<label class="w3-large"><input name="q3" id="4" value="4" type="radio"> Session.getInstance(Properties,  Authenticator)</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q3" id="5" value="5" type="checkbox"> Session.getDefaultInstance(Properties)</label>
+		<label class="w3-large"><input name="q3" id="5" value="5" type="radio"> Session.getDefaultInstance(Properties)</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q3" id="6" value="6" type="checkbox"> Session.getDefaultInstance(Properties,  Authenticator)</label>
+		<label class="w3-large"><input name="q3" id="6" value="6" type="radio"> Session.getDefaultInstance(Properties,  Authenticator)</label>
 	</div>
 </div>
 
@@ -69,28 +69,28 @@
 	<input name="qnumber" value="4" size="25" type="hidden">
 	<input name="q4_time" value="" size="25" type="hidden">
 	<div class="radio">
-		<label class="w3-large"><input name="q4" id="1" value="1" type="checkbox"> setFrom -> setRecipient -> setSubject -> setContent</label>
+		<label class="w3-large"><input name="q4" id="1" value="1" type="radio"> setFrom -> setRecipient -> setSubject -> setContent</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q4" id="2" value="2" type="checkbox"> setFrom -> setRecipient -> setContent -> setSubject</label>
+		<label class="w3-large"><input name="q4" id="2" value="2" type="radio"> setFrom -> setRecipient -> setContent -> setSubject</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q4" id="3" value="3" type="checkbox"> setRecipient -> setFrom -> setSubject -> setContent</label>
+		<label class="w3-large"><input name="q4" id="3" value="3" type="radio"> setRecipient -> setFrom -> setSubject -> setContent</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q4" id="4" value="4" type="checkbox"> setRecipient -> setFrom -> setContent -> setSubject</label>
+		<label class="w3-large"><input name="q4" id="4" value="4" type="radio"> setRecipient -> setFrom -> setContent -> setSubject</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q4" id="5" value="5" type="checkbox"> setFrom -> setRecipients -> setSubject -> setContent</label>
+		<label class="w3-large"><input name="q4" id="5" value="5" type="radio"> setFrom -> setRecipients -> setSubject -> setContent</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q4" id="6" value="6" type="checkbox"> setFrom -> setRecipients -> setContent -> setSubject</label>
+		<label class="w3-large"><input name="q4" id="6" value="6" type="radio"> setFrom -> setRecipients -> setContent -> setSubject</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q4" id="7" value="7" type="checkbox"> setRecipients -> setFrom -> setSubject -> setContent</label>
+		<label class="w3-large"><input name="q4" id="7" value="7" type="radio"> setRecipients -> setFrom -> setSubject -> setContent</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q4" id="8" value="8" type="checkbox"> setRecipients -> setFrom -> setContent -> setSubject</label>
+		<label class="w3-large"><input name="q4" id="8" value="8" type="radio"> setRecipients -> setFrom -> setContent -> setSubject</label>
 	</div>
 </div>
 
@@ -119,8 +119,7 @@
 
 <div class="qdiv w3-padding-jumbo disable-text">
 	<p class="w3-large" style="margin-bottom:20px;">6. 视频中运行程序时产生了什么异常:
-		<input class="underline-input w3-light-grey " name="q6" ></input>, 在视频中的时间是：
-		<input class="underline-input w3-light-grey " name="q6"></input> 
+		<input class="underline-input w3-light-grey " name="q6" placeholder="请在此输入"></input></input> 
 		<span name="q6_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
 	<input name="qnumber" value="6" size="25" type="hidden">
 	<input name="q6_time" value="" size="25" type="hidden">
@@ -138,22 +137,22 @@
 	<input name="qnumber" value="7" size="25" type="hidden">
 	<input name="q7_time" value="" size="25" type="hidden">
 	<div class="radio">
-		<label class="w3-large"><input name="q7" id="1" value="1" type="checkbox"> recipient</label>
+		<label class="w3-large"><input name="q7" id="1" value="1" type="radio"> recipient</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q7" id="2" value="2" type="checkbox"> title</label>
+		<label class="w3-large"><input name="q7" id="2" value="2" type="radio"> title</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q7" id="3" value="3" type="checkbox"> content</label>
+		<label class="w3-large"><input name="q7" id="3" value="3" type="radio"> content</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q7" id="4" value="4" type="checkbox"> session</label>
+		<label class="w3-large"><input name="q7" id="4" value="4" type="radio"> session</label>
 	</div>
 </div>
 
 <div class="qdiv w3-padding-jumbo disable-text">
 	<p class="w3-large" style="margin-bottom:20px;">8. 视频中，message设置完成后，最后一步如何发送message:
-		<input class="underline-input w3-light-grey " name="q8" ></input>
+		<input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入"></input>
 		<span name="q8_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
 	<input name="qnumber" value="8" size="25" type="hidden">
 	<input name="q8_time" value="" size="25" type="hidden">

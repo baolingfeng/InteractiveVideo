@@ -42,7 +42,7 @@ $(document).ready(function(){
 		$("input[name=q"+i+"]").prop('disabled', true);
 		
 		var type = $("input[name=q"+i+"]").prop('type');
-		if(type == "checkbox")
+		if(type == "checkbox" || type == "radio")
 		{
 			$("input[name=q"+i+"]").change(function() {
 				var t = createDateAsUTC(new Date()).toISOString().slice(0, 19); 
@@ -57,7 +57,7 @@ $(document).ready(function(){
 				lastQestion = this.name;
 			});
 		}
-		else if(type == "text")
+		else if(type == "text" || type == "textarea")
 		{
 			$("input[name=q"+i+"]").focus(function(){
 				var t = createDateAsUTC(new Date()).toISOString().slice(0, 19); 
@@ -96,10 +96,6 @@ $(document).ready(function(){
 	
 	<br/><br/>
 	<label class="w3-small italic-text">
-	参与这个实验有机会获得价值100元的京东券（如果想参加，请留下你的邮箱），非常感谢你的参与。
-	<br/>
-	<input class="underline-input w3-light-grey " name="useremail" size="100"></input>
-	<br/>
 	如果有问题，请联系鲍凌峰博士：lingfengbao@zju.edu.cn
 	</label>
 	<br/><br/>
@@ -112,6 +108,14 @@ $(document).ready(function(){
 	<span class="italic-text"> <%=groupName %> </span>
 	<input name="group" value="<%=group %> " size="25" type="hidden">
 	</h2>
+</div>
+
+<div class="w3-padding-jumbo w3-light-grey">
+	<label class="w3c-large" style="color:red; font-style: italic;">
+	注意：
+	<input name="single-choice" id="1" value="1" type="radio" checked disabled> 单选
+	<input name="single-choice" id="1" value="1" type="checkbox" checked disabled> 可多选
+	</label>
 </div>
 
 <div class="w3-padding-jumbo w3-light-grey">

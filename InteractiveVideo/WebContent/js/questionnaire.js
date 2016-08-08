@@ -189,7 +189,7 @@ function submitQuestionnaire(n, videoName, group)
 				}
 				else
 				{
-					window.location = "finish.jsp";
+					window.location = "finish.jsp?record=" + d;
 				}
 				//closeWindow();
 			},
@@ -223,29 +223,51 @@ function startAnswer(n, button, videoName, group)
 
 function submitRate(recordId)
 {
-	var rate = $("input[name='rate']:checked").val();
+	var canSubmit = true;
+	var rates = []
+	for(i=1; i<=4; i++)
+	{
+		var res = $("input[name=r" + i + "]:checked");
+		console.log(res);
+		if(res.length <= 0)
+		{
+			canSubmit = false;
+			rates.push(-1);
+		}
+		else
+		{
+			rates.push(res.val());
+		}
+	}
 	var comment = $("textarea[name='comment']").val();
 	
-	console.log(rate + "/" + comment);
-	$.ajax({
-		type: 'post',
-		url: '/InteractiveVideo/SubmitRate',
-		data: {'recordId': recordId, 'rate': rate, 'comment': comment},
-		beforeSend: function() {
-	       console.log("submitting rate.....")
-	    },
-		success: function(d){
-			console.log(d);
-			
-			var r = confirm("提交成功, 谢谢你的参与！");
-			
-			window.location = "finish.jsp";
-		},
-		error: function(xhr, status, error) {
-			var err = eval("(" + xhr.responseText + ")");
-			alert(err.Message);
-		}
-	});
+	if(canSubmit)
+	{
+		$.ajax({
+			type: 'post',
+			url: '/InteractiveVideo/SubmitRate',
+			data: {'recordId': recordId, 'rate': rates.join(','), 'comment': comment},
+			beforeSend: function() {
+		       console.log("submitting rate.....")
+		    },
+			success: function(d){
+				console.log(d);
+				
+				var r = confirm("提交成功, 谢谢你的参与！");
+				
+				window.location = "finish.jsp?record=" + recordId;
+			},
+			error: function(xhr, status, error) {
+				var err = eval("(" + xhr.responseText + ")");
+				alert(err.Message);
+			}
+		});
+	}
+	else
+	{
+		$(".warning-text").removeClass("hidden-text");
+	}
+	
 }
 
 function closeWindow()
@@ -275,8 +297,9 @@ function closeWindow()
        }catch(e){}
 
        try{
-           window.open('','_self','');
-           window.close();
+    	   netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserWrite");
+    	   window.open('','_self');
+    	   window.close();
        }catch(e){ }
    }
 }
@@ -293,11 +316,11 @@ function resetQuestionPage(n)
 		$("input[name=q"+i+"]").prop('disabled', true);
 		
 		var type = $("input[name=q"+i+"]").prop('type');
-		if(type == "checkbox")
+		if(type == "checkbox" || type == "radio")
 		{
 			$("input[name=q"+i+"]").prop('checked', false);
 		}
-		else if(type == "text")
+		else if(type == "text" || type == "textarea")
 		{
 			$("input[name=q"+i+"]").val('');
 		}

@@ -84,3 +84,7 @@ input[type=checkbox].w3-check:disabled+.w3-validate,input[type=radio].w3-radio:d
 .bold-text{font-weight: bold;}
 .warning-text{font-size:15px!important; font-style: italic; color: red;}
 .hidden-text{display: none} .show-text{display:""}
+
+::-webkit-input-placeholder{color: red; text-align:center; font-style: italic;}
+:-ms-input-placeholder{color: red; text-align:center; font-style: italic;}
+::-moz-placeholder{color: red; text-align:center; font-style: italic;}
