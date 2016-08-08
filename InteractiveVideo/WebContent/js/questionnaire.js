@@ -35,7 +35,7 @@ function initQuestionnaire()
 				$("#timecounter_span").css("display", "");
 				//$("#timecounter").html(0);
 				
-				$("#controlBtn").val(" 提交 ");
+				$("input[name=controlBtn]").val(" 提交 ")
 			}
 			else
 			{
