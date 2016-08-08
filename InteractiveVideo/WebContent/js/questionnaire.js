@@ -39,10 +39,7 @@ function initQuestionnaire()
 			}
 			else
 			{
-				for(i=1; i<=questionNumber; i++)
-				{
-					$("input[name=q"+i+"_time]").val('');
-				}
+				resetQuestionPage(questionNumber);
 			}
 		}
 	});
@@ -71,7 +68,8 @@ function beginAnswer(n, videoName, group)
 		$("#timecounter").html(second);
 	}, 1000);
 	
-	$("#controlBtn").val(" 提交 ");
+	//$("#controlBtn").val(" 提交 ");
+	$("input[name=controlBtn]").val(" 提交 ");
 	
 	$.ajax({
 		type: 'post',
@@ -104,54 +102,68 @@ function submitQuestionnaire(n, videoName, group)
 	var canSubmit = true;
 	for(i=1; i<=n; i++)
 	{
-		var type = $("input[name=q"+i+"]").prop('type');
-		if(type == "checkbox" || type == "radio")
+		var types = new Set();
+		$("input[name=q"+i+"]").each(function(){
+			types.add($(this).prop('type'))
+		});
+		
+		types = Array.from(types);
+		if(types.length == 1)
 		{
-			var checkedValues = [];
-			$('input[name="q'+ i + '"]:checked').each(function() {
-				checkedValues.push(this.value);
-			});
-			
-			if(checkedValues.length > 0)
+			var type = types[0];
+			if(type == "checkbox" || type == "radio")
 			{
-				answers["q"+i] = checkedValues.join(",");
-				answers["q"+i+"_time"] = $("input[name=q"+i+"_time]").val();
-				$("span[name=q"+i+"_warning]").addClass("hidden-text");
-			}
-			else
-			{
-				canSubmit = false;
-				$("span[name=q"+i+"_warning]").removeClass("hidden-text");
-			}
-		}
-		else if(type == "text" || type == "textarea")
-		{
-			var inputValues = [];
-			var allNonEmpty = true;
-			$("input[name=q"+i+"]").each(function() {
-				if(this.value.trim() != "")
+				var checkedValues = [];
+				$('input[name="q'+ i + '"]:checked').each(function() {
+					checkedValues.push(this.value);
+				});
+				
+				if(checkedValues.length > 0)
 				{
-					inputValues.push(this.value);
+					answers["q"+i] = checkedValues.join(",");
+					answers["q"+i+"_time"] = $("input[name=q"+i+"_time]").val();
+					$("span[name=q"+i+"_warning]").addClass("hidden-text");
 				}
 				else
 				{
-					allNonEmpty = false;
+					canSubmit = false;
+					$("span[name=q"+i+"_warning]").removeClass("hidden-text");
 				}
-			});
-			
-			if(inputValues.length > 0)
-			{
-				answers["q"+i] = inputValues.join(",");
-				answers["q"+i+"_time"] = $("input[name=q"+i+"_time]").val();
-				$("span[name=q"+i+"_warning]").addClass("hidden-text");
 			}
-			
-			if(!allNonEmpty)
+			else if(type == "text" || type == "textarea")
 			{
-				canSubmit = false;
-				$("span[name=q"+i+"_warning]").removeClass("hidden-text");
+				var inputValues = [];
+				var allNonEmpty = true;
+				$("input[name=q"+i+"]").each(function() {
+					if(this.value.trim() != "")
+					{
+						inputValues.push(this.value);
+					}
+					else
+					{
+						allNonEmpty = false;
+					}
+				});
+				
+				if(inputValues.length > 0)
+				{
+					answers["q"+i] = inputValues.join(",");
+					answers["q"+i+"_time"] = $("input[name=q"+i+"_time]").val();
+					$("span[name=q"+i+"_warning]").addClass("hidden-text");
+				}
+				
+				if(!allNonEmpty)
+				{
+					canSubmit = false;
+					$("span[name=q"+i+"_warning]").removeClass("hidden-text");
+				}
 			}
 		}
+		else
+		{
+			
+		}
+		
 	}
 	console.log(answers);
 	
@@ -174,6 +186,10 @@ function submitQuestionnaire(n, videoName, group)
 				if(group == "1")
 				{
 					window.location = "rate.jsp?record=" + d;
+				}
+				else
+				{
+					window.location = "finish.jsp";
 				}
 				//closeWindow();
 			},
@@ -223,7 +239,7 @@ function submitRate(recordId)
 			
 			var r = confirm("提交成功, 谢谢你的参与！");
 			
-			closeWindow();
+			window.location = "finish.jsp";
 		},
 		error: function(xhr, status, error) {
 			var err = eval("(" + xhr.responseText + ")");
@@ -265,6 +281,39 @@ function closeWindow()
    }
 }
 
+function resetQuestionPage(n)
+{
+	$(".qdiv").each(function(){
+		$(this).addClass("disable-text");
+		$(this).removeClass("w3-light-grey");
+	});
+	
+	for(i=1; i<=n; i++)
+	{
+		$("input[name=q"+i+"]").prop('disabled', true);
+		
+		var type = $("input[name=q"+i+"]").prop('type');
+		if(type == "checkbox")
+		{
+			$("input[name=q"+i+"]").prop('checked', false);
+		}
+		else if(type == "text")
+		{
+			$("input[name=q"+i+"]").val('');
+		}
+		
+		$("input[name=q"+i+"_time]").val('');
+		
+		$("span[name=q"+i+"_warning]").addClass("hidden-text");
+	}
+	
+	$("input[name=controlBtn]").val(" 打开视频并开始答题 ")
+	$("#timecounter_span").css("display", "none");
+	$(".overall-warning").addClass("hidden-text");
+	
+	clearInterval(intervalId);
+}
+
 function resetAnswer(n, videoName, group)
 {
 	$.ajax({
@@ -274,33 +323,7 @@ function resetAnswer(n, videoName, group)
 		success: function(d){
 			console.log(d);
 			
-			$(".qdiv").each(function(){
-				$(this).addClass("disable-text");
-				$(this).removeClass("w3-light-grey");
-			});
-			
-			for(i=1; i<=n; i++)
-			{
-				$("input[name=q"+i+"]").prop('disabled', true);
-				
-				var type = $("input[name=q"+i+"]").prop('type');
-				if(type == "checkbox")
-				{
-					$("input[name=q"+i+"]").prop('checked', false);
-				}
-				else if(type == "text")
-				{
-					$("input[name=q"+i+"]").val('');
-				}
-				
-				$("input[name=q"+i+"_time]").val('');
-			}
-			
-			$("#controlBtn").val(" 打开视频并开始答题 ");
-			$("#timecounter_span").css("display", "none");
-			$(".overall-warning").addClass("hidden-text");
-			
-			clearInterval(intervalId);
+			resetQuestionPage(n);
 		}
 	});
 	

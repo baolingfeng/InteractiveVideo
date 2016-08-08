@@ -4,9 +4,9 @@
 <div class="qdiv w3-padding-jumbo disable-text">
 	<p class="w3-large" style="margin-bottom:20px;">1. 视频中activePage.openEditor第一个参数类型是
 	<input class="underline-input w3-light-grey " name="q1">? <br/>
-	第二个String参数代表： 
-	<label class="w3-large"><input name="q1" id="1" value="1" type="radio"> editor id</label>
-	<label class="w3-large"><input name="q1" id="2" value="2" type="radio"> editor class</label>
+	第二个String参数代表： <input class="underline-input w3-light-grey " name="q1"> (
+	<label class="w3-large"> A. editor id</label>
+	<label class="w3-large"> B. editor class</label>)
 	<span name="q1_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span>
 	</p>
 	<input name="qnumber" value="1" size="25" type="hidden">

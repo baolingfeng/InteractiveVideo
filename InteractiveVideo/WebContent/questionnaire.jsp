@@ -115,7 +115,7 @@ $(document).ready(function(){
 </div>
 
 <div class="w3-padding-jumbo w3-light-grey">
-	<input id="controlBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 打开视频并开始答题 " type="button" onclick="startAnswer(questionNumber, this.value, '<%=videoName%>', '<%=group%>')">
+	<input id="controlBtn" name="controlBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 打开视频并开始答题 " type="button" onclick="startAnswer(questionNumber, this.value, '<%=videoName%>', '<%=group%>')">
 	<span id="timecounter_span" class="w3-large" style="padding-left:50px; display: none;">持续时间：<label id="timecounter"></label></span>
 	<input name="starttime" value="" type="hidden">
 </div>
@@ -134,6 +134,7 @@ $(document).ready(function(){
 
 <div class="w3-padding-jumbo w3-light-grey">
 	<input id="resetBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 回到顶部 " type="button" onclick="backToTop()">
+	<input id="controlBtn" name="controlBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 打开视频并开始答题 " type="button" onclick="startAnswer(questionNumber, this.value, '<%=videoName%>', '<%=group%>')">
 	<input id="resetBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 重新开始答题 " type="button" onclick="resetAnswer(questionNumber, '<%=videoName%>', '<%=group%>')">
 </div>
 
