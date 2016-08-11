@@ -41,6 +41,10 @@ $(document).ready(function(){
 		type: 'post',
 		contentType: "application/json",
 		url: '/InteractiveVideo/GetVideoData?video='+videoName,
+		error: function(xhr, status, error) {
+			var err = eval("(" + xhr.responseText + ")");
+			alert(err.Message);
+		},
 		success: function(data){
 			events = data;
 			console.log(events);
@@ -389,6 +393,9 @@ function openFileDiff(fileName, i)
 
 function generateFileContent()
 {
+	google.charts.load("current", {packages:["timeline"]});
+	google.charts.setOnLoadCallback(drawChart);
+	
 	for(var i=0; i<fileset.length; i++)
 	{
 		//var s = fileset[i].replace('.', '_');
@@ -411,7 +418,7 @@ function generateFileContent()
 			showJavadoc(selectedText, '', 'true');
 		});
 		
-		editor.setSize(900, 1000);
+		editor.setSize(900, 700);
 		
 		fileEditor[fileset[i]] = editor;
 	}
@@ -419,20 +426,88 @@ function generateFileContent()
 	$('#filetabs').tabs();
 }
 
-function getFileName(e)
+function getFileName(idx)
 {
-	var fileName = "";
-	if(e.summary.hasOwnProperty('normalfile'))
-	{
-		fileName = e.summary.normalfile;
-	}
-	else if(e.summary.hasOwnProperty('codepatch'))
-	{
-		fileName = e.summary.codepatch.fileName;
-	}
+	if(idx < 0) return "";
 	
-	return fileName;
+	var e = events[idx];
+	if(e.summary.hasOwnProperty('codepatch'))
+	{
+		return e.summary.codepatch.fileName;
+	}
+	else if(e.summary.hasOwnProperty('normalfile'))
+	{
+		return e.summary.normalfile;
+	}
+	else
+	{
+		return "";
+	}
 }
+
+function drawChart() 
+{
+    var container = document.getElementById('timelinebar');
+    var chart = new google.visualization.Timeline(container);
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn({ type: 'string', id: 'Position' });
+    dataTable.addColumn({ type: 'string', id: 'Name' });
+    dataTable.addColumn({ type: 'date', id: 'Start' });
+    dataTable.addColumn({ type: 'date', id: 'End' });
+    //dataTable.addColumn({ type: 'number', id: 'idx' });
+    
+    var start = 0;
+    var i = 1;
+    var preFile = getFileName(start);
+    while(preFile == "") {preFile = getFileName(start+1); start += 1;}
+    i = start + 1;
+    
+    data = [];
+    slices = [];
+    while(i<events.length)
+    {
+    	var fileName = getFileName(i);
+    	if(fileName == "")  {i+=1; continue;}
+    	
+    	if(fileName != preFile)
+    	{
+    		slices.push([preFile, start, i]);
+    		start = i;
+    		preFile = fileName;
+    	}
+    	
+    	i+=1;
+    }
+    
+    slices.push([preFile, start, i-1]);
+    for(i=0; i<slices.length; i++)
+    {
+    	var preMinute = Math.floor(events[slices[i][1]].interval / 60);
+    	var preSecond = Math.floor(events[slices[i][1]].interval - preMinute * 60);
+    	var minute = Math.floor(events[slices[i][2]].interval / 60);
+    	var second = Math.floor(events[slices[i][2]].interval - minute * 60);
+    	
+    	data.push(["File Timeline", slices[i][0], new Date(0, 0, 0, 0, preMinute, preSecond), new Date(0, 0, 0, 0, minute, second)]);
+    }
+    
+    dataTable.addRows(data);
+    
+    var options = {
+    	     width: screen_width * 0.5
+    		};
+    
+    chart.draw(dataTable, options);
+    
+    google.visualization.events.addListener(chart, 'select', function(){
+    	row = chart.getSelection()[0].row;
+    	console.log(data[row][2] - data[0][2]);
+    	start = data[row][3];
+    	
+    	v.currentTime = (data[row][2] - data[0][2])/1000;
+		v.pause();
+    });
+
+  }
 
 function getFileContent(e)
 {
@@ -445,7 +520,7 @@ function getFileContent(e)
 
 function updateFiles(eventidx)
 {
-	var fileName = getFileName(events[eventidx]);
+	var fileName = getFileName(eventidx);
 	
 	console.log("current file: " + fileName);
 	if(fileName != "")
@@ -472,7 +547,7 @@ function updateFiles(eventidx)
 		var t = eventidx - 1;
 		while(t >= 0)
 		{
-			var f2 = getFileName(events[t]);
+			var f2 = getFileName(t);
 			if(f2 == fileset[i])
 			{
 				//f2 = f2.replace('.', '_');

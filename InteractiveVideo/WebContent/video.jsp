@@ -21,6 +21,7 @@
 <script src="js/clike.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/jquery.popupoverlay.js"></script>
+<script src="js/loader.js"></script>
 
 </head>
 <%
@@ -80,9 +81,11 @@ String video = VideoMetadataManager.getInstance().getVideo(videoName);
 
 <div id="mySidenav2" class="sidenav">
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
+	  <div id="filetips" class="w3-yellow">这个区域可以随着视频播放更新文件内容</div>
 	  <div id="filetabs" style="display:none;">
 		  <ul id="tabnames"></ul>
 	  </div>
+	  <div id="timelinebar" style="width: 100%;"></div>
 </div>
 </body>
 
