@@ -2,22 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ page import="cn.zju.blf.video.VideoMetadataManager" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>问卷调查 - Java如何发送Email</title>
-</head>
-<link rel="stylesheet" href="css/questionnaire.css" />
-<script src="js/jquery-3.0.0.min.js"></script>
-<script src="js/questionnaire.js"></script>
-
 <%
 	String group = request.getParameter("group");
 	String videoName = request.getParameter("name");
 	
 	String groupName = "1".equals(group) ? "实验组" : "对照组";
 %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>问卷调查 - <%=videoName %></title>
+</head>
+<link rel="stylesheet" href="css/questionnaire.css" />
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/questionnaire.js"></script>
+
+
 <script type="text/javascript">
 var group = <%=group%>;
 var videoName = "<%=videoName%>";

@@ -21,7 +21,7 @@
 <script src="js/clike.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/jquery.popupoverlay.js"></script>
-<script src="js/loader.js"></script>
+<script src="charts/loader.js"></script>
 
 </head>
 <%

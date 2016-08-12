@@ -764,6 +764,11 @@ function removeHighlight(hIdx)
 
 var zoomInScale = 0.65;
 function openNav() {
+	if($('#mySidenav2').width() != 0)
+	{
+		closeNav2();
+	}
+	
 	var margin = screen_width * 0.5 + 'px';
 	$('#mySidenav').width(margin);
 	$('#main').css('margin-right', margin);
@@ -793,6 +798,11 @@ function closeNav() {
 }
 
 function openNav2() {
+	if($('#mySidenav').width() != 0)
+	{
+		closeNav();
+	}
+	
 	var margin = screen_width * 0.5 + 'px';
 	$('#mySidenav2').width(margin);
 	$('#main').css('margin-right', margin);
