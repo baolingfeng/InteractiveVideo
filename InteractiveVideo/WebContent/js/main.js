@@ -82,8 +82,8 @@ $(document).ready(function(){
 	                
 	            },
 	            items: {
-	                "javadoc": {name: "View API Documentation"},
-	                "stackoverflow": {name: "View Related Posts in StackOverflow"}
+	                "javadoc": {name: "View API Documentation"}
+//	                "stackoverflow": {name: "View Related Posts in StackOverflow"}
 	            }
 			});
 			
@@ -110,8 +110,8 @@ $(document).ready(function(){
 	                
 	            },
 	            items: {
-	                "javadoc": {name: "View API Documentation"},
-	                "stackoverflow": {name: "View Related Posts in StackOverflow"}
+	                "javadoc": {name: "View API Documentation"}
+//	                "stackoverflow": {name: "View Related Posts in StackOverflow"}
 	            }
 			});
 			

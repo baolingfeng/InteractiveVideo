@@ -59,6 +59,13 @@ $(document).ready(function(){
 					if(qt != "") qt = qt + ",";
 					$("input[name="+this.name+"_time]").val(qt + t);
 				}
+				else
+				{
+					var qt = $("input[name="+this.name+"_time]").val();
+					var arr = qt.split(',')
+					arr[arr.length-1] = t;
+					$("input[name="+this.name+"_time]").val(arr.join(','));
+				}
 				
 				lastQestion = this.name;
 			});
@@ -72,6 +79,13 @@ $(document).ready(function(){
 					var qt = $("input[name="+this.name+"_time]").val();
 					if(qt != "") qt = qt + ",";
 					$("input[name="+this.name+"_time]").val(qt + t);
+				}
+				else
+				{
+					var qt = $("input[name="+this.name+"_time]").val();
+					var arr = qt.split(',')
+					arr[arr.length-1] = t;
+					$("input[name="+this.name+"_time]").val(arr.join(','));
 				}
 				
 				lastQestion = this.name;
