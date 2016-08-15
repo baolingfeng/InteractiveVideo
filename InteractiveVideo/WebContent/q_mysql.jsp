@@ -133,3 +133,12 @@
 	<input name="qnumber" value="8" size="25" type="hidden">
 	<input name="q8_time" value="" size="25" type="hidden">
 </div>
+
+<div class="qdiv w3-padding-jumbo disable-text">
+	<p class="w3-large" style="margin-bottom:20px;">9. 在创建Statement时，可以将返回的ResultSet设置为scrollable and insensitive to updates，请根据如上要求完成填空：<br/>
+	Statement stmt = con.createStatement(<input class="underline-input w3-light-grey " name="q9" placeholder="请在此输入"/>, <input class="underline-input w3-light-grey " name="q9" placeholder="请在此输入"/>);<br/> 
+	ResultSet rs = stmt.executeQuery("SELECT a, b FROM TABLE2"
+	<span name="q9_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
+	<input name="qnumber" value="8" size="25" type="hidden">
+	<input name="q9_time" value="" size="25" type="hidden">
+</div>

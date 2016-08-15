@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" media="all" href="css/style.css" />
+<link rel="stylesheet" media="all" href="css/jquery-ui.css" />
 <link href="js/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="js/codemirror.css" /> 	
 <link rel="stylesheet" href="js/jquery-ui.min.css">
@@ -82,7 +83,7 @@ String video = VideoMetadataManager.getInstance().getVideo(videoName);
 <div id="mySidenav2" class="sidenav">
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav2()">&times;</a>
 	  <div id="filetips" class="w3-yellow">这个区域可以随着视频播放更新文件内容</div>
-	  <div id="filetabs" style="display:none;">
+	  <div id="filetabs" style="display:none; ">
 		  <ul id="tabnames"></ul>
 	  </div>
 	  <div id="timelinebar" style="width: 100%;"></div>

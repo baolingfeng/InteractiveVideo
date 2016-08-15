@@ -55,8 +55,15 @@ $(document).ready(function(){
 			
 			generateFileContent();
 			
-			$('.imgtd').on('click', 'img', function(){
-				var eventidx = $(this).parent().parent().attr('eventidx');
+//			$('.imgtd').on('click', 'img', function(){
+//				var eventidx = $(this).parent().parent().attr('eventidx');
+//				v.currentTime = events[eventidx].interval;
+//				v.pause();
+//			});
+			
+			$('.imgtd').click(function(){
+				var eventidx = $(this).parent().attr('eventidx');
+				//console.log($(this).find('.time'));
 				v.currentTime = events[eventidx].interval;
 				v.pause();
 			});
@@ -143,7 +150,7 @@ $(document).ready(function(){
         {
         	highlight(hIdx);
         	
-        	//$('#display').scrollTop(tr.offsetTop - 10);
+        	$('#display').scrollTop(tr.offsetTop - 50);
         	
 			var eventidx = $(tr).attr('eventidx');
         	updateFiles(eventidx);
@@ -184,6 +191,8 @@ function highlight(hIdx)
 	if($(tr).find('.imgtd').length <= 0) return;
 	
 	$(tr).css('background-color', 'yellow');
+	$(tr).find('.time').css('background-color', '#0099ff');
+	
 	hIdx++;
 	tr = $('#tbl_events tr')[hIdx];
 	
@@ -286,7 +295,8 @@ function generateTR(e, i)
 			{
 				str += '<tr class="' + trclass + '"';
 				str += ' eventidx=' + i + ">"
-				str += '<td class="imgtd" rowspan=' + len + '><img src="images/clock.png"/></td>';
+				//str += '<td class="imgtd" rowspan=' + len + '><img src="images/clock.png"/></td>';
+				str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
 				str += '<td><span class="op' + operation + '">' + operation + '<span></td>';
 				str += '<td><span class="' + type.toLowerCase() + 'type">' + type + '<span></td>';
 				
@@ -309,7 +319,8 @@ function generateTR(e, i)
 	{
 		str += '<tr class="' + trclass + '"';
 		str += ' eventidx=' + i + ">"
-		str += '<td class="imgtd"><img src="images/clock.png"/></td>';
+//		str += '<td class="imgtd"><img src="images/clock.png"/></td>';
+		str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
 		str += '<td colspan="4">Open Source Code File <span class="file">' + e.summary.codepatch.fileName + '</span></td></tr>'
 		
 		if(fileset.indexOf(e.summary.codepatch.fileName) < 0){
@@ -322,13 +333,15 @@ function generateTR(e, i)
 		{
 			str += '<tr class="' + trclass + '"';
 			str += ' eventidx=' + i + ">"
-			str += '<td class="imgtd"><img src="images/clock.png"/></td>';
+//			str += '<td class="imgtd"><img src="images/clock.png"/></td>';
+			str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
 			str += '<td colspan="4">Open File <span class="file">' + e.summary.normalfile + '</span></td></tr>'
 		}
 		else{
 			str += '<tr class="' + trclass + '"';
 			str += ' eventidx=' + i + ">"
-			str += '<td class="imgtd"><img src="images/clock.png"/></td>';
+//			str += '<td class="imgtd"><img src="images/clock.png"/></td>';
+			str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
 			str += '<td colspan="4">Edit File <span class="file">' + e.summary.normalfile + '</span>'; 
 			str += '(<a href="#" onclick=openFileDiff("' + e.summary.normalfile + '",' + i + ')>see edit detail</a>)'
 			str += '<div id="' + e.summary.normalfile + '_' + i + '_div" class="hiddendiv">' + e.summary.normalfilediff + '</div></td></tr>'
@@ -342,7 +355,8 @@ function generateTR(e, i)
 	{
 		str += '<tr class="' + trclass + '"';
 		str += ' eventidx=' + i + ">"
-		str += '<td class="imgtd"><img src="images/clock.png"/></td>';
+//		str += '<td class="imgtd"><img src="images/clock.png"/></td>';
+		str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
 		str += '<td colspan="2">Exception</td><td colspan="2">';
 		
 		var arr = e.summary.console.split(',');
@@ -358,7 +372,7 @@ function generateTR(e, i)
 	if(typeof(VTTCue) != "undefined")
 	{
 		var cue = new VTTCue(e.interval, e.interval + 3, cueStr);
-		cue.line = 1;
+		//cue.line = 1;
 		track.addCue(cue); 
 	}
 	
@@ -396,10 +410,11 @@ function generateFileContent()
 	google.charts.load("current", {packages:["timeline"]});
 	google.charts.setOnLoadCallback(drawChart);
 	
+	var colors = distinctColors(fileset.length);
 	for(var i=0; i<fileset.length; i++)
 	{
 		//var s = fileset[i].replace('.', '_');
-		$('#tabnames').append('<li><a href="#' + fileset[i] + '">' + fileset[i] + '</a></li>')
+		$('#tabnames').append('<li style="background:' + colors[i] + ';"><a href="#' + fileset[i] + '">' + fileset[i] + '</a></li>')
 		
 		$('#filetabs').append('<div id="' + fileset[i] + '"><textarea id="' + fileset[i] + '_content"></textarea></div>')
 	
@@ -423,7 +438,17 @@ function generateFileContent()
 		fileEditor[fileset[i]] = editor;
 	}
 	
-	$('#filetabs').tabs();
+	$('#filetabs').tabs({
+		activate: function(event, ui) {
+			//console.log(ui.newPanel[0].id + "/" + ui.oldPanel[0].id);
+			var activeTab = ui.newPanel[0].id;
+			var oldTab = ui.oldPanel[0].id;
+			
+			$('a[href="#' + activeTab +'"]').parent().css('font-weight', 'bold');
+			$('a[href="#' + oldTab +'"]').parent().css('font-weight', 'normal');
+			fileEditor[activeTab].refresh();
+		}
+	});
 }
 
 function getFileName(idx)
@@ -493,7 +518,8 @@ function drawChart()
     dataTable.addRows(data);
     
     var options = {
-    	     width: screen_width * 0.5
+    	     width: screen_width * 0.5,
+    	     colors: distinctColors(fileset.length)
     		};
     
     chart.draw(dataTable, options);
@@ -657,7 +683,7 @@ function search(query)
 	$('#search').popup('show');
 	
 	var pos = $('[name=searchbox]').position();
-	$("#search").css({top: pos.top, left: pos.left, position:'absolute'});
+	$("#search").css({top: pos.top, left: pos.left + 100, position:'absolute'});
 	$('#search_result').css('width', '100%');
 	$('#search_result').css('height', '100%');
 	
@@ -746,6 +772,7 @@ function removeHighlight(hIdx)
 	if($(tr).find('.imgtd').length <= 0) return;
 	
 	$(tr).removeAttr("style");
+	$(tr).find('.time').css('background-color', '#ff9900');
 	hIdx++;
 	tr = $('#tbl_events tr')[hIdx];
 	
@@ -836,4 +863,120 @@ function formatNumberLength(num, length) {
         r = "0" + r;
     }
     return r;
+}
+
+var add_rect = function(i) {
+	var e1 = events[i].interval;
+	if(i < events.length - 1)
+	{
+		var e2 = events[i+1].interval;
+	}
+	else
+	{
+		var e2 = v.duration;
+	}
+	
+	var w = Math.floor(e2 - e1);
+	if(w > 60) {
+		w = 60;
+	}else if(w < 5)
+	{
+		w = 5;
+	}
+	
+    var div = "<div class='time' style='left: 0px; right: 0px; width: " + w + "px; " +
+    		"height: 20px; background-color: #ff9900;'></div>"
+    return div;
+}
+
+Colors = ['#FF4C3B', '#097054','#FFDE00','#6599FF','#FF9900',]
+
+function distinctColors(count) {
+	if(count <= 5) return Colors.slice(0, count);
+	
+    var colors = [];
+    for(hue = 0; hue < 360; hue += 360 / count) {
+    	var rgb = hsvToRgb(hue, 100, 100);
+    	var colorStr = "#";
+    	for(i=0; i<rgb.length; i++)
+    	{
+    		var c = rgb[i].toString(16);
+    		if(c.length < 2){
+    			c = '0' + c;
+    		}
+    		colorStr += c;
+    	}
+        colors.push(colorStr);
+    }
+    return colors;
+}
+
+function hsvToRgb(h, s, v) {
+	var r, g, b;
+	var i;
+	var f, p, q, t;
+ 
+	// Make sure our arguments stay in-range
+	h = Math.max(0, Math.min(360, h));
+	s = Math.max(0, Math.min(100, s));
+	v = Math.max(0, Math.min(100, v));
+ 
+	// We accept saturation and value arguments from 0 to 100 because that's
+	// how Photoshop represents those values. Internally, however, the
+	// saturation and value are calculated from a range of 0 to 1. We make
+	// That conversion here.
+	s /= 100;
+	v /= 100;
+ 
+	if(s == 0) {
+		// Achromatic (grey)
+		r = g = b = v;
+		return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+	}
+ 
+	h /= 60; // sector 0 to 5
+	i = Math.floor(h);
+	f = h - i; // factorial part of h
+	p = v * (1 - s);
+	q = v * (1 - s * f);
+	t = v * (1 - s * (1 - f));
+ 
+	switch(i) {
+		case 0:
+			r = v;
+			g = t;
+			b = p;
+			break;
+ 
+		case 1:
+			r = q;
+			g = v;
+			b = p;
+			break;
+ 
+		case 2:
+			r = p;
+			g = v;
+			b = t;
+			break;
+ 
+		case 3:
+			r = p;
+			g = q;
+			b = v;
+			break;
+ 
+		case 4:
+			r = t;
+			g = p;
+			b = v;
+			break;
+ 
+		default: // case 5:
+			r = v;
+			g = p;
+			b = q;
+	}
+ 
+	return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }

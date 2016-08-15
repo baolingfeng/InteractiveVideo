@@ -25,13 +25,17 @@ var group = <%=group%>;
 var videoName = "<%=videoName%>";
 
 var questionNumber = -1;
-if(videoName == "email" || videoName == "mysql")
+if(videoName == "email")
 {
-	questionNumber = 8;
+	questionNumber = 9;
+}
+else if(videoName == "mysql")
+{
+	questionNumber = 9;
 }
 else if(videoName == "plugin")
 {
-	questionNumber = 10;
+	questionNumber = 11;
 }
 
 var lastQestion = -1;
@@ -100,8 +104,12 @@ $(document).ready(function(){
 	<label class="w3-small italic-text">
 	如果有问题，请联系鲍凌峰博士：lingfengbao@zju.edu.cn
 	</label>
-	<br/><br/>
-	
+</div>
+
+<div class="w3-padding-jumbo w3-light-grey">
+	<h3 style="margin-bottom:10px;">
+	<a href="howto.jsp?group=<%=group %>" target="_blank">问卷和工具说明：</a>
+	</h3>
 </div>
 
 <div class="w3-padding-jumbo w3-light-grey hidden-text">

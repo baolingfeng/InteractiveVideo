@@ -147,10 +147,10 @@
 		<label class="w3-large"><input name="q7" id="4" value="4" type="checkbox"> doSave</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q7" id="4" value="4" type="checkbox"> doSaveAs</label>
+		<label class="w3-large"><input name="q7" id="5" value="5" type="checkbox"> doSaveAs</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q7" id="4" value="4" type="checkbox"> isDirty</label>
+		<label class="w3-large"><input name="q7" id="6" value="6" type="checkbox"> isDirty</label>
 	</div>
 </div>
 
@@ -187,10 +187,10 @@
 		<label class="w3-large"><input name="q9" id="4" value="4" type="radio"> text.getText().size()</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q9" id="4" value="4" type="radio"> text.getText().length</label>
+		<label class="w3-large"><input name="q9" id="5" value="5" type="radio"> text.getText().length</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q9" id="4" value="4" type="radio"> text.getText().length()</label>
+		<label class="w3-large"><input name="q9" id="6" value="6" type="radio"> text.getText().length()</label>
 	</div>
 </div>
 
@@ -213,4 +213,31 @@
 	<span name="q10_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
 	<input name="qnumber" value="8" size="25" type="hidden">
 	<input name="q10_time" value="" size="25" type="hidden">
+</div>
+
+<div class="qdiv w3-padding-jumbo disable-text">
+	<p class="w3-large" style="margin-bottom:20px;">
+		11. org.eclipse.ui.IWorkbenchPage.openEditor这个接口除了视频中openEditor(IEditorInput, String)的可以有多少种输入参数:
+	<span name="q11_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span><br/>
+	</p>
+	<input name="qnumber" value="11" size="25" type="hidden">
+	<input name="q9_time" value="" size="25" type="hidden">
+	<div class="radio">
+		<label class="w3-large"><input name="q11" id="1" value="1" type="checkbox"> openEditor(IEditorInput, String, boolean)</label>
+	</div>
+	<div class="radio">
+		<label class="w3-large"><input name="q11" id="2" value="2" type="checkbox"> openEditor(IEditorInput, String, boolean, int)</label>
+	</div>
+	<div class="radio">
+		<label class="w3-large"><input name="q11" id="3" value="3" type="checkbox"> openEditor(IEditorInput[], String[], int)</label>
+	</div>
+	<div class="radio">
+		<label class="w3-large"><input name="q11" id="4" value="4" type="checkbox"> openEditor(IEditorInput[], String[], IMemento[], int, int)</label>
+	</div>
+	<div class="radio">
+		<label class="w3-large"><input name="q11" id="5" value="5" type="checkbox"> openEditor(IEditorInput[], String[], IMemento[], boolean)</label>
+	</div>
+	<div class="radio">
+		<label class="w3-large"><input name="q11" id="6" value="6" type="checkbox"> openEditor(IEditorInput[], String[], IMemento[], boolean, int)</label>
+	</div>
 </div>
