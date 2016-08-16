@@ -315,41 +315,48 @@ function generateTR(e, i)
 			}
 		}
 	}
-	else if(e.summary.hasOwnProperty('codepatch'))
+//	else if(e.summary.hasOwnProperty('codepatch'))
+//	{
+//		str += '<tr class="' + trclass + '"';
+//		str += ' eventidx=' + i + ">"
+////		str += '<td class="imgtd"><img src="images/clock.png"/></td>';
+//		str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
+//		str += '<td colspan="4">Open Source Code File <span class="file">' + e.summary.codepatch.fileName + '</span></td></tr>'
+//		
+//		if(fileset.indexOf(e.summary.codepatch.fileName) < 0){
+//			fileset.push(e.summary.codepatch.fileName);
+//		}
+//	}
+	else if(e.summary.hasOwnProperty('normalfilediff'))
 	{
 		str += '<tr class="' + trclass + '"';
 		str += ' eventidx=' + i + ">"
-//		str += '<td class="imgtd"><img src="images/clock.png"/></td>';
 		str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
-		str += '<td colspan="4">Open Source Code File <span class="file">' + e.summary.codepatch.fileName + '</span></td></tr>'
-		
-		if(fileset.indexOf(e.summary.codepatch.fileName) < 0){
-			fileset.push(e.summary.codepatch.fileName);
+		str += '<td colspan="2"><span class="editfile">File Edit</span> </td><td><span class="file">' + e.summary.normalfile + '</span></td>'; 
+		str += '<td>(<a href="#" onclick=openFileDiff("' + e.summary.normalfile + '",' + i + ')>see edit detail</a>)</td>'
+		str += '<div id="' + e.summary.normalfile + '_' + i + '_div" class="hiddendiv">' + e.summary.normalfilediff + '</div></td></tr>'
+	
+	}
+	else if(e.summary.hasOwnProperty('openfile'))
+	{
+		str += '<tr class="' + trclass + '"';
+		str += ' eventidx=' + i + ">"
+		str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
+		str += '<td colspan="2"><span class="openfile">File Open</span> </td><td><span class="file">' + e.summary.openfile + '</span></td>'
+		str += '<td></td></tr>'
+	
+		if(fileset.indexOf(e.summary.openfile) < 0){
+			fileset.push(e.summary.openfile);
 		}
 	}
-	else if(e.summary.hasOwnProperty('normalfile'))
+	else if(e.summary.hasOwnProperty('switchfile'))
 	{
-		if(!e.summary.hasOwnProperty('normalfilediff'))
-		{
-			str += '<tr class="' + trclass + '"';
-			str += ' eventidx=' + i + ">"
-//			str += '<td class="imgtd"><img src="images/clock.png"/></td>';
-			str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
-			str += '<td colspan="4">Open File <span class="file">' + e.summary.normalfile + '</span></td></tr>'
-		}
-		else{
-			str += '<tr class="' + trclass + '"';
-			str += ' eventidx=' + i + ">"
-//			str += '<td class="imgtd"><img src="images/clock.png"/></td>';
-			str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
-			str += '<td colspan="4">Edit File <span class="file">' + e.summary.normalfile + '</span>'; 
-			str += '(<a href="#" onclick=openFileDiff("' + e.summary.normalfile + '",' + i + ')>see edit detail</a>)'
-			str += '<div id="' + e.summary.normalfile + '_' + i + '_div" class="hiddendiv">' + e.summary.normalfilediff + '</div></td></tr>'
-		}
-		
-		if(fileset.indexOf(e.summary.normalfile) < 0){
-			fileset.push(e.summary.normalfile);
-		}
+		str += '<tr class="' + trclass + '"';
+		str += ' eventidx=' + i + ">"
+		str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
+		str += '<td colspan="2"><span class="switchfile">File Switch </span></td><td><span class="file">' + e.summary.switchfilefrom;
+		str += '</span> ---> <span class="file">' + e.summary.switchfile + '</span></td>';
+		str += '<td></td></tr>'
 	}
 	else if(e.summary.hasOwnProperty('console'))
 	{
@@ -444,8 +451,11 @@ function generateFileContent()
 			var activeTab = ui.newPanel[0].id;
 			var oldTab = ui.oldPanel[0].id;
 			
-			$('a[href="#' + activeTab +'"]').parent().css('font-weight', 'bold');
-			$('a[href="#' + oldTab +'"]').parent().css('font-weight', 'normal');
+			$('a[href="#' + activeTab +'"]').css('font-weight', 'bold');
+			$('a[href="#' + oldTab +'"]').css('font-weight', 'normal');
+			$('a[href="#' + activeTab +'"]').css('text-decoration', 'underline');
+			$('a[href="#' + oldTab +'"]').css('text-decoration', '');
+			
 			fileEditor[activeTab].refresh();
 		}
 	});
@@ -463,6 +473,14 @@ function getFileName(idx)
 	else if(e.summary.hasOwnProperty('normalfile'))
 	{
 		return e.summary.normalfile;
+	}
+	else if(e.summary.hasOwnProperty('openfile'))
+	{
+		return e.summary.openfile;
+	}
+	else if(e.summary.hasOwnProperty('switchfile'))
+	{
+		return e.summary.switchfile;
 	}
 	else
 	{
@@ -630,21 +648,32 @@ function search(query)
 				}
 			}
 		}
-		else if(e.summary.hasOwnProperty('codepatch'))
-		{
-			var javefile = e.summary.codepatch.fileName;
-			if(javefile.toLowerCase().indexOf(query) >= 0)
-			{
-				var expr = 'Open Source Code File <span class="file">' + javefile + '</span>'
-				res.push({'interval': e.interval, 'expr': expr});
-			}
-		}
-		else if(e.summary.hasOwnProperty('normalfile'))
+		else if(e.summary.hasOwnProperty('normalfilediff'))
 		{
 			var fileName = e.summary.normalfile;
 			if(fileName.toLowerCase().indexOf(query) >= 0)
 			{
 				var expr = 'Open File <span class="file">' + fileName + '</span>'
+				res.push({'interval': e.interval, 'expr': expr});
+			}
+		}
+		else if(e.summary.hasOwnProperty('openfile'))
+		{
+			var file = e.summary.openfile;
+			if(file.toLowerCase().indexOf(query) >= 0)
+			{
+				var expr = 'Open File <span class="file">' + file + '</span>'
+				res.push({'interval': e.interval, 'expr': expr});
+			}
+		}
+		else if(e.summary.hasOwnProperty('switchfile'))
+		{
+			var file1 = e.summary.switchfile;
+			var file2 = e.summary.switchfilefrom;
+			if(file1.toLowerCase().indexOf(query) >= 0 || file2.toLowerCase().indexOf(query) >= 0)
+			{
+				var expr = 'Switch File from <span class="file">' + file2 + '</span>';
+				expr += 'to <span class="file">' + file1 + '</span>';
 				res.push({'interval': e.interval, 'expr': expr});
 			}
 		}

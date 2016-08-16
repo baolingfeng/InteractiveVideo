@@ -95,15 +95,15 @@ public class EventManager {
 		Map<String, List<CodePatch>> codes = new HashMap<String,List<CodePatch>>();
 		Map<String, List<FileContent>> fileChanges = new HashMap<String, List<FileContent>>();
 		List<FileContent> consoleOutputs = new ArrayList<FileContent>();
-		boolean flag = true;
 		
 		//Map<String, Map<String, Object>> summaries = new HashMap<String, Map<String, Object>>();
 		List<AbstractEvent> aes = new ArrayList<AbstractEvent>();
 		
+		String preFile = null;
+		
 		for(int i=0; i<events.size(); i++)
 		{
 			LowLevelEvent e = events.get(i);
-			
 			
 			if(e.getAction() == null ||!"eclipse.exe".equals(e.getProcessName())) continue;
 			
@@ -117,46 +117,7 @@ public class EventManager {
 			if(ActionTypes.isEqual("edit", e.getAction().getActionType()) && 
 					ActionTypes.isEqual("pane", e.getAction().getParentActionType()))
 			{
-				if(parentActionName.endsWith(".java"))
-				{
-					CodePatch cp = CodeAnalyzer.parseJavaSource(e.getAction().getActionValue());
-					//CodePatch cp = JDTCodeAnalyzer.parseJavaSource(e.getAction().getActionValue());
-					if(cp == null) continue;
-					
-					cp.setFileName(parentActionName);
-					if(codes.containsKey(parentActionName))
-					{
-						int len = codes.get(parentActionName).size();
-						List<CodeOperation> changes = new ArrayList<CodeOperation>();
-						if(!CodeComparator.compareCodePatch(codes.get(parentActionName).get(len-1), cp, changes))
-						{
-							codes.get(parentActionName).add(cp);
-							//System.out.println("############");
-							
-							AbstractEvent ae = new AbstractEvent();
-							ae.setTimestamp(e.getTimestamp());
-							ae.setInterval(interval);
-							ae.addExpression("codepatch", cp);
-							ae.addExpression("codechanges", changes);
-							ae.addExpression("action", e.getAction());
-							aes.add(ae);
-						}
-					}
-					else
-					{
-						List<CodePatch> l = new ArrayList<CodePatch>();
-						l.add(cp);
-						codes.put(parentActionName, l);
-						
-						AbstractEvent ae = new AbstractEvent();
-						ae.setTimestamp(e.getTimestamp());
-						ae.addExpression("codepatch", cp);
-						ae.setInterval(interval);
-						ae.addExpression("action", e.getAction());
-						aes.add(ae);
-					}
-				}
-				else if("Console".equals(parentActionName))
+				if("Console".equals(parentActionName))
 				{
 					String exceptions = getExceptionInfoFromConsole(e.getAction().getActionValue());
 					FileContent fc = new FileContent(e.getTimestamp(), "Console", exceptions);
@@ -187,44 +148,108 @@ public class EventManager {
 						}
 					}
 				}
-				else // if(parentActionName.lastIndexOf('.') > 0)
+				else 
 				{
-					if(fileChanges.containsKey(parentActionName))
+					
+					if(preFile == null)
 					{
-						int len = fileChanges.get(parentActionName).size();
-						FileContent preFC = fileChanges.get(parentActionName).get(len - 1);
-						double t = TimeUtil.calcTimeDiff(preFC.getTimestamp(), e.getTimestamp());
-						
-						if(t > 60 && !preFC.getContent().equals(e.getAction().getActionValue()))
-						{
-							//fileChanges.get(parentActionName).add(e.getAction().getActionValue());
-							String diff = CompareUtil.compareText2(preFC.getContent(), e.getAction().getActionValue());
-							
-							AbstractEvent ae = new AbstractEvent();
-							ae.setTimestamp(e.getTimestamp());
-							ae.setInterval(interval);
-							ae.addExpression("normalfile", parentActionName);
-							ae.addExpression("normalfilediff", diff);
-							ae.addExpression("action", e.getAction());
-							aes.add(ae);
-							
-							fileChanges.get(parentActionName).add(new FileContent(e.getTimestamp(), parentActionName, e.getAction().getActionValue()));
-						}
-					}
-					else
-					{
-						FileContent fc = new FileContent(e.getTimestamp(), parentActionName, e.getAction().getActionValue());
-						List<FileContent> l = new ArrayList<FileContent>();
-						l.add(fc);
-						
-						fileChanges.put(parentActionName, l);
-						
 						AbstractEvent ae = new AbstractEvent();
 						ae.setTimestamp(e.getTimestamp());
 						ae.setInterval(interval);
-						ae.addExpression("normalfile", parentActionName);
+						ae.addExpression("openfile", parentActionName);
 						ae.addExpression("action", e.getAction());
 						aes.add(ae);
+					}
+					else if(!preFile.equals(parentActionName))
+					{
+						if(codes.containsKey(parentActionName) || fileChanges.containsKey(parentActionName))
+						{
+							AbstractEvent ae = new AbstractEvent();
+							ae.setTimestamp(e.getTimestamp());
+							ae.setInterval(interval);
+							ae.addExpression("switchfile", parentActionName);
+							ae.addExpression("switchfilefrom", preFile);
+							ae.addExpression("action", e.getAction());
+							aes.add(ae);
+						}
+						else
+						{
+							AbstractEvent ae = new AbstractEvent();
+							ae.setTimestamp(e.getTimestamp());
+							ae.setInterval(interval);
+							ae.addExpression("openfile", parentActionName);
+							ae.addExpression("action", e.getAction());
+							aes.add(ae);
+						}
+					}
+					
+					if(parentActionName.endsWith(".java"))
+					{
+						preFile = parentActionName;
+						
+						CodePatch cp = CodeAnalyzer.parseJavaSource(e.getAction().getActionValue());
+						//CodePatch cp = JDTCodeAnalyzer.parseJavaSource(e.getAction().getActionValue());
+						if(cp == null) continue;
+						
+						cp.setFileName(parentActionName);
+						if(codes.containsKey(parentActionName))
+						{
+							int len = codes.get(parentActionName).size();
+							List<CodeOperation> changes = new ArrayList<CodeOperation>();
+							if(!CodeComparator.compareCodePatch(codes.get(parentActionName).get(len-1), cp, changes))
+							{
+								codes.get(parentActionName).add(cp);
+								
+								AbstractEvent ae = new AbstractEvent();
+								ae.setTimestamp(e.getTimestamp());
+								ae.setInterval(interval);
+								ae.addExpression("codepatch", cp);
+								ae.addExpression("codechanges", changes);
+								ae.addExpression("action", e.getAction());
+								aes.add(ae);
+							}
+						}
+						else
+						{
+							List<CodePatch> l = new ArrayList<CodePatch>();
+							l.add(cp);
+							codes.put(parentActionName, l);
+						}
+					}
+					else 
+					{
+						if(fileChanges.containsKey(parentActionName))
+						{
+							int len = fileChanges.get(parentActionName).size();
+							FileContent preFC = fileChanges.get(parentActionName).get(len - 1);
+							double t = TimeUtil.calcTimeDiff(preFC.getTimestamp(), e.getTimestamp());
+							
+							if(t > 60 && !preFC.getContent().equals(e.getAction().getActionValue()))
+							{
+								String diff = CompareUtil.compareText2(preFC.getContent(), e.getAction().getActionValue());
+								
+								AbstractEvent ae = new AbstractEvent();
+								ae.setTimestamp(e.getTimestamp());
+								ae.setInterval(interval);
+								ae.addExpression("normalfile", parentActionName);
+								ae.addExpression("normalfilediff", diff);
+								ae.addExpression("action", e.getAction());
+								aes.add(ae);
+								
+								fileChanges.get(parentActionName).add(new FileContent(e.getTimestamp(), parentActionName, e.getAction().getActionValue()));
+							}
+						}
+						else
+						{
+							FileContent fc = new FileContent(e.getTimestamp(), parentActionName, e.getAction().getActionValue());
+							List<FileContent> l = new ArrayList<FileContent>();
+							l.add(fc);
+							
+							fileChanges.put(parentActionName, l);
+
+						}
+						
+						preFile = parentActionName;
 					}
 				}
 				

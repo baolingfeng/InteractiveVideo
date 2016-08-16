@@ -192,6 +192,21 @@ tr:last-child {
 	font-weight: bold;
 }
 
+.editfile {
+	color: #cc9900;
+	font-weight: bold;
+}
+
+.openfile {
+	color: #ff4d4d;
+	font-weight: bold;
+}
+
+.switchfile {
+	color: #9966ff;
+	font-weight: bold;
+}
+
 .hiddendiv{
 	visibility: hidden;
 	top: 0px;
