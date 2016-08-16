@@ -19,7 +19,7 @@ public class VideoMetadataManager {
 		
 		VideoMetadata md1 = new VideoMetadata();
 		md1.setLogFile("/data/email/log/log.db3");
-		md1.setVideo("data/email/email_audio.mp4");
+		md1.setVideo("data/email/email.mp4");
 		md1.setStartTime("2016-07-13 16:08:34.000");
 		md1.setTitle("如何使用Java发送email");
 		md1.setIntro("这个视频是介绍如何使用Java来编写发送email的程序");
@@ -27,7 +27,7 @@ public class VideoMetadataManager {
 		
 		VideoMetadata md2 = new VideoMetadata();
 		md2.setLogFile("/data/plugin/log/log.db3");
-		md2.setVideo("data/plugin/plugin_audio.mp4");
+		md2.setVideo("data/plugin/plugin.mp4");
 		md2.setStartTime("2016-07-30 14:54:23.000");
 		md2.setTitle("如何实现一个简单的Eclipse插件编辑器");
 		md2.setIntro("该程序主要包括一下功能<br/>1. 基本的编辑，保存和另存为功能；<br/>2. 文本长度统计功能，显示在Eclipse中的一个view上");
@@ -35,7 +35,7 @@ public class VideoMetadataManager {
 		
 		VideoMetadata md3 = new VideoMetadata();
 		md3.setLogFile("/data/mysql/log/log.db3");
-		md3.setVideo("data/mysql/mysql_audio.mp4");
+		md3.setVideo("data/mysql/mysql.mp4");
 		md3.setStartTime("2016-08-04 13:44:57.000");
 		md3.setTitle("Java操作MySql数据库");
 		md3.setIntro("实现如何用Java操作MySql数据库，包括：<br/>1. 执行简单的sql查询语句；<br/>2. 用preparedstatment查询数据库；"
