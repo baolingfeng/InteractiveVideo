@@ -223,7 +223,7 @@
 	<span name="q11_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span><br/>
 	</p>
 	<input name="qnumber" value="11" size="25" type="hidden">
-	<input name="q9_time" value="" size="25" type="hidden">
+	<input name="q11_time" value="" size="25" type="hidden">
 	<div class="radio">
 		<label class="w3-large"><input name="q11" id="1" value="1" type="checkbox"> openEditor(IEditorInput, String, boolean)</label>
 	</div>
