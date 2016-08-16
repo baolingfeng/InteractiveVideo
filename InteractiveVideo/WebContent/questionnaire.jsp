@@ -31,7 +31,7 @@ if(videoName == "email")
 }
 else if(videoName == "mysql")
 {
-	questionNumber = 9;
+	questionNumber = 8;
 }
 else if(videoName == "plugin")
 {
