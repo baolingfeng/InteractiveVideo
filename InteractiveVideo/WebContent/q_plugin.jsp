@@ -156,7 +156,7 @@
 
 <div class="qdiv w3-padding-jumbo disable-text">
 	<p class="w3-large" style="margin-bottom:20px;">8. 按视频中MyEditor类填空:<br/>
-	<span style="padding-left:20px">public void createPartControl(<input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入">, arg0) {</span> <br/>
+	<span style="padding-left:20px">public void createPartControl(<input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入"> arg0) {</span> <br/>
 	<span style="padding-left:60px">Composite topComp = new Composite(<input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入">, <input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入">);</span> <br/>
 	<span style="padding-left:60px">topComp.setLayout(<input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入">);</span> <br/>
 	<br/>

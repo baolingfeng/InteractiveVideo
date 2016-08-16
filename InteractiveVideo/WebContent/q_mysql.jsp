@@ -139,7 +139,7 @@
 <div class="qdiv w3-padding-jumbo disable-text">
 	<p class="w3-large" style="margin-bottom:20px;">8. 在创建Statement时，可以将返回的ResultSet设置为scrollable and insensitive to updates，应如何操作
 	（<span class="w3-red w3-small">提示：这题无法在视频中找到，需要查看相关资料，实验组可以查看API Document,对照组可以使用搜索引擎搜索</span>）：<br/><br/>
-	Statement stmt = con.createStatement(<input class="underline-input w3-light-grey " name="q9" placeholder="请在此输入"/>, <input class="underline-input w3-light-grey " name="q9" placeholder="请在此输入"/>);<br/> 
+	Statement stmt = con.createStatement(<input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入"/>, <input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入"/>);<br/> 
 	ResultSet rs = stmt.executeQuery("SELECT a, b FROM TABLE2");
 	<span name="q8_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
 	<input name="qnumber" value="8" size="25" type="hidden">
