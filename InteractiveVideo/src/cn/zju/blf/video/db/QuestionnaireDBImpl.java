@@ -73,8 +73,14 @@ public class QuestionnaireDBImpl {
 		for(int i=1; i<=qnumber; i++)
 		{
 			String question = "q" + i;
-			String answer = jsonObj.getString(question);
-			String times = jsonObj.getString("q"+i+"_time");
+			String answer = "";
+			String times = "";
+			if(jsonObj.has(question))
+			{
+				answer = jsonObj.getString(question);
+				times = jsonObj.getString("q"+i+"_time");
+			}
+			
 			db.executeInsert(sql2, recordId, question, answer, times);
 		}
 		
