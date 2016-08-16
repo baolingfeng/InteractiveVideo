@@ -10,6 +10,19 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/questionnaire.css" />
+<link rel="stylesheet" href="css/flexslider.css" />
+
+<script src="js/jquery.1.min.js"></script>
+<script src="js/jquery.flexslider-min.js"></script>
+<script src="js/modernizr.js"></script>
+
+ <script type="text/javascript" src="js/shCore.js"></script>
+  <script type="text/javascript" src="js/shBrushXml.js"></script>
+  <script type="text/javascript" src="js/shBrushJScript.js"></script>
+
+  <!-- Optional FlexSlider Additions -->
+  <script src="js/jquery.easing.js"></script>
+  <script src="js/jquery.mousewheel.js"></script>
 
 <title>说明</title>
 </head>
@@ -30,6 +43,25 @@
 			</ul>
 		
 		<%if("1".equals(group)){ %>
+		
+		<span style="background-color: yellow;">图片说明：</span>
+		<div class="flexslider" style="width: 1240px;">
+		  <ul class="slides">
+		    <li>
+		      <img src="images/1.png" />
+		    </li>
+		    <li>
+		      <img src="images/2.png" />
+		    </li>
+		    <li>
+		      <img src="images/3.png" />
+		    </li>
+		    <li>
+		      <img src="images/4.png" />
+		    </li>
+		  </ul>
+		</div>
+		
 		<span style="background-color: yellow;">实验组请先看一下下面一个简短的视频了解下我们的工具； 你们可以利用我们的工具更快更好的完成问卷。</span>
 		
 		
@@ -42,5 +74,13 @@
 		<%} %>
 		</div>
 </div>
+
+<script>
+$(window).load(function() {
+	  $('.flexslider').flexslider({
+	    animation: "slide"
+	  });
+});
+</script>
 </body>
 </html>
