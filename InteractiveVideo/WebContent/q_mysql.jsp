@@ -81,8 +81,9 @@
 </div>
 
 <div class="qdiv w3-padding-jumbo disable-text">
-	<p class="w3-large" style="margin-bottom:20px;">5. Statement类下列方法execute、executeUpdate、executeQuery的返回值分别是
-	<input class="underline-input w3-light-grey " name="q5" size="60" placeholder="请在此输入"></input>
+	<p class="w3-large" style="margin-bottom:20px;">5. Statement（包括PreparedStatement和CallableStatement）类下列方法execute、executeQuery的返回值的类型分别是
+	<input class="underline-input w3-light-grey " name="q5"  placeholder="请在此输入" />、
+	<input class="underline-input w3-light-grey " name="q5"  placeholder="请在此输入" />
 	<span name="q5_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span>
 	</p>
 	<input name="qnumber" value="5" size="25" type="hidden">
@@ -114,6 +115,7 @@
 	</div>
 </div>
 
+<!--  
 <div class="qdiv w3-padding-jumbo disable-text">
 	<p class="w3-large" style="margin-bottom:20px;">
 		7. 视频中，运行程序时，main函数调用insertWithAutoIncrement这个函数，共有
@@ -124,21 +126,22 @@
 	<input name="qnumber" value="7" size="25" type="hidden">
 	<input name="q7_time" value="" size="25" type="hidden">
 </div>
+-->
 
 <div class="qdiv w3-padding-jumbo disable-text">
-	<p class="w3-large" style="margin-bottom:20px;">8. 视频中调用的存储过程的输出变量是
-	<input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入"/>，运行结果:
-	<input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入"/>
-	<span name="q8_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
-	<input name="qnumber" value="8" size="25" type="hidden">
-	<input name="q8_time" value="" size="25" type="hidden">
+	<p class="w3-large" style="margin-bottom:20px;">7. 视频中调用的存储过程的运行结果是:
+	<input class="underline-input w3-light-grey " name="q7" placeholder="请在此输入"/>
+	<span name="q7_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
+	<input name="qnumber" value="7" size="25" type="hidden">
+	<input name="q7_time" value="" size="25" type="hidden">
 </div>
 
 <div class="qdiv w3-padding-jumbo disable-text">
-	<p class="w3-large" style="margin-bottom:20px;">9. 在创建Statement时，可以将返回的ResultSet设置为scrollable and insensitive to updates，请根据如上要求完成填空：<br/>
+	<p class="w3-large" style="margin-bottom:20px;">8. 在创建Statement时，可以将返回的ResultSet设置为scrollable and insensitive to updates，应如何操作
+	（<span class="w3-red w3-small">提示：这题无法在视频中找到，需要查看相关资料，实验组可以查看API Document,对照组可以使用搜索引擎搜索</span>）：<br/><br/>
 	Statement stmt = con.createStatement(<input class="underline-input w3-light-grey " name="q9" placeholder="请在此输入"/>, <input class="underline-input w3-light-grey " name="q9" placeholder="请在此输入"/>);<br/> 
-	ResultSet rs = stmt.executeQuery("SELECT a, b FROM TABLE2"
-	<span name="q9_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
+	ResultSet rs = stmt.executeQuery("SELECT a, b FROM TABLE2");
+	<span name="q8_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
 	<input name="qnumber" value="8" size="25" type="hidden">
-	<input name="q9_time" value="" size="25" type="hidden">
+	<input name="q8_time" value="" size="25" type="hidden">
 </div>

@@ -6,7 +6,7 @@ function initQuestionnaire()
 	$.ajax({
 		type: 'post',
 		contentType: "application/json",
-		url: '/InteractiveVideo/QuestionnaireSession?type=get',
+		url: '/InteractiveVideo/QuestionnaireSession?type=get&video='+videoName,
 		success: function(d){
 			console.log(d);
 			
@@ -74,7 +74,7 @@ function beginAnswer(n, videoName, group)
 	$.ajax({
 		type: 'post',
 		contentType: "application/json",
-		url: '/InteractiveVideo/QuestionnaireSession?type=set&starttime='+starttime.toISOString().slice(0, 19),
+		url: '/InteractiveVideo/QuestionnaireSession?type=set&starttime='+starttime.toISOString().slice(0, 19) + '&video='+videoName,
 		success: function(d){
 			console.log(d);
 			
@@ -152,11 +152,11 @@ function submitQuestionnaire(n, videoName, group)
 					$("span[name=q"+i+"_warning]").addClass("hidden-text");
 				}
 				
-				if(!allNonEmpty)
-				{
-					canSubmit = false;
-					$("span[name=q"+i+"_warning]").removeClass("hidden-text");
-				}
+//				if(!allNonEmpty)
+//				{
+//					canSubmit = false;
+//					$("span[name=q"+i+"_warning]").removeClass("hidden-text");
+//				}
 			}
 		}
 		else
@@ -342,7 +342,7 @@ function resetAnswer(n, videoName, group)
 	$.ajax({
 		type: 'post',
 		contentType: "application/json",
-		url: '/InteractiveVideo/QuestionnaireSession?type=reset',
+		url: '/InteractiveVideo/QuestionnaireSession?type=reset&video='+videoName,
 		success: function(d){
 			console.log(d);
 			

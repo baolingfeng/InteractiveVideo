@@ -39,12 +39,14 @@ public class QuestionnaireSession extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String type = (String)request.getParameter("type");
+		String type = request.getParameter("type");
+		String video = request.getParameter("video");
+		System.out.println(type + "/" + video);
 		HttpSession session = request.getSession();
 		
 		if("get".equals(type))
 		{
-			String starttime = (String)session.getAttribute("starttime");
+			String starttime = (String)session.getAttribute(video + "starttime");
 			if(starttime == null)
 			{
 				starttime = "";
@@ -60,7 +62,8 @@ public class QuestionnaireSession extends HttpServlet {
 		else if("set".equals(type))
 		{
 			String starttime = request.getParameter("starttime");
-			session.setAttribute("starttime", starttime);
+			
+			session.setAttribute(video + "starttime", starttime);
 			
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");

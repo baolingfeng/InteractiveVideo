@@ -122,7 +122,7 @@ $(document).ready(function(){
 
 <div class="w3-padding-jumbo w3-light-grey">
 	<h3 style="margin-bottom:10px;">
-	<a href="howto.jsp?group=<%=group %>" target="_blank">问卷和工具说明：</a>
+	<a class="w3-red" href="howto.jsp?group=<%=group %>" target="_blank">请查看问卷和工具介绍</a>
 	</h3>
 </div>
 

@@ -2,6 +2,8 @@ package cn.zju.blf.video.db;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -95,6 +97,34 @@ public class QuestionnaireDBImpl {
 		db.executeInsert(sql2, recordId, "comment", comment,  "");
 	}
 	
+	public void queryQuestionnaireRecords()
+	{
+		String sql = "select * from records";
+		
+		List<Map<String, Object>> res = db.executeQuery(sql);
+		
+		for(Map<String, Object> record : res)
+		{
+			int id = (Integer)record.get("id");
+			String host = (String)record.get("host");
+			String email = (String)record.get("email");
+			String starttime = (String)record.get("starttime");
+			String endtime = (String)record.get("endtime");
+			String group = (String)record.get("egroup");
+			String video = (String)record.get("video");
+			
+			System.out.println(id + "/" + host + "/" + email + "/" + starttime + "/" + endtime + "/" + group + "/" + video);
+		}
+		
+	}
+	
+	public void queryQuestionnaireAnswers(int recordId)
+	{
+		String sql = "select * from answers where record_id = ?";
+		
+		List<Map<String, Object>> res = db.executeQuery(sql, recordId);
+	}
+	
 	public void close()
 	{
 		db.close();
@@ -109,8 +139,9 @@ public class QuestionnaireDBImpl {
 	{
 		QuestionnaireDBImpl db = new QuestionnaireDBImpl();
 		
-		String sql = "insert into records(email, starttime, endtime, group) values(?, ?, ?, ?)";
+		//String sql = "insert into records(email, starttime, endtime, group) values(?, ?, ?, ?)";
 		
-		int recordId = db.getDB().executeInsertWithAI(sql, "test", "1", "2", "3");
+		//int recordId = db.getDB().executeInsertWithAI(sql, "test", "1", "2", "3");
+		db.queryQuestionnaireRecords();
 	}
 }

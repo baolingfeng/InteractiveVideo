@@ -64,10 +64,10 @@
 </div>
 
 <div class="qdiv w3-padding-jumbo disable-text">
-	<p class="w3-large" style="margin-bottom:20px;">4. 视频中某一个运行编写的Eclipse编辑器插件时，出现了错误，通过修改哪一条语句修复了这个bug？ 
+	<p class="w3-large" style="margin-bottom:20px;">4. 视频中某一个运行编写的Eclipse编辑器插件时，出现了一个IllegalArgumentException，
+	通过将activePage.openEditor的第一个参数null修改为 <input class="underline-input w3-light-grey " name="q4" size="67" placeholder="请在此输入"/>, 
+	从而修复了这个bug？ 
 	<span name="q4_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span><br/>
-	原语句: <input class="underline-input w3-light-grey " name="q4" size="67" placeholder="请在此输入"> <br/>
-	修复的语句：<input class="underline-input w3-light-grey " name="q4" size="60" placeholder="请在此输入"> <br/>
 	</p>
 	<input name="qnumber" value="4" size="25" type="hidden">
 	<input name="q4_time" value="" size="25" type="hidden">
@@ -218,6 +218,8 @@
 <div class="qdiv w3-padding-jumbo disable-text">
 	<p class="w3-large" style="margin-bottom:20px;">
 		11. org.eclipse.ui.IWorkbenchPage.openEditor这个接口除了视频中openEditor(IEditorInput, String)的可以有多少种输入参数:
+		<br/>
+	（<span class="w3-red w3-small">提示：这题无法在视频中找到，需要查看相关资料，实验组可以查看API Document,对照组可以使用搜索引擎搜索</span>）
 	<span name="q11_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span><br/>
 	</p>
 	<input name="qnumber" value="11" size="25" type="hidden">

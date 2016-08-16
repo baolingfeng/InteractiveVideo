@@ -161,7 +161,8 @@
 <div class="qdiv w3-padding-jumbo disable-text">
 	<p class="w3-large" style="margin-bottom:20px;">9. java.mail.Message.setFrom这个方法可以不接受任何参数，
 	如果没有输入参数，“From”这个值会设置为property中哪个属性<input class="underline-input w3-light-grey " name="q9" placeholder="请在此输入"/>
-		如果property没有那个属性，则会采用什么值：<input class="underline-input w3-light-grey " name="q9" placeholder="请在此输入"/>
+		如果property没有那个属性，则会采用什么值：<input class="underline-input w3-light-grey " name="q9" placeholder="请在此输入"/> <br/>
+		（<span class="w3-red w3-small">提示：这题无法在视频中找到，需要查看相关资料，实验组可以查看API Document,对照组可以使用搜索引擎搜索</span>）
 		<span name="q9_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
 	<input name="qnumber" value="9" size="25" type="hidden">
 	<input name="q9_time" value="" size="25" type="hidden">
