@@ -25,7 +25,7 @@ if (session != null) {
 <div class="w3-padding-jumbo w3-light-grey">
 	<h1>感谢你的参与！</h1>
 	<label class="w3-large italic-text">
-	参与这个实验有机会获得价值100元的京东券（如果想参加，请留下你的邮箱），非常感谢你的参与。
+	参与这个实验我们将赠送价值50元左右的U盘，非常感谢你的参与。
 	<br/>
 	<span id="info">
 	<input class="underline-input w3-light-grey " name="useremail" size="100" placeholder="请在此输入"></input>
@@ -33,7 +33,6 @@ if (session != null) {
 	<input id="resetBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 提交 " type="button" onclick="submitEmail()">
 	</span>
 	</label>
-	
 </div>
 </div>
 <script type="text/javascript">

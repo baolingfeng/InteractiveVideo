@@ -333,7 +333,7 @@ function generateTR(e, i)
 		str += ' eventidx=' + i + ">"
 		str += '<td class="imgtd" rowspan=' + len + '>' + add_rect(i) + '</td>';
 		str += '<td colspan="2"><span class="editfile">File Edit</span> </td><td><span class="file">' + e.summary.normalfile + '</span></td>'; 
-		str += '<td>(<a href="#" onclick=openFileDiff("' + e.summary.normalfile + '",' + i + ')>see edit detail</a>)</td>'
+		str += '<td>(<a href="#" onclick=openFileDiff("' + e.summary.normalfile + '",' + i + ')>see edit detail</a>)'
 		str += '<div id="' + e.summary.normalfile + '_' + i + '_div" class="hiddendiv">' + e.summary.normalfilediff + '</div></td></tr>'
 	
 	}
