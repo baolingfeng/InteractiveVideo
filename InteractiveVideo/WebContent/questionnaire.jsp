@@ -142,9 +142,9 @@ $(document).ready(function(){
 	</label>
 </div>
 
-<div class="w3-padding-jumbo w3-light-grey hidden-text">
+<div class="w3-padding-jumbo w3-light-grey">
 	<input id="controlBtn" name="controlBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 打开视频并开始答题 " type="button" onclick="startAnswer(questionNumber, this.value, '<%=videoName%>', '<%=group%>')">
-	<span id="timecounter_span" class="w3-large" style="padding-left:50px; display: none;">持续时间：<label id="timecounter"></label></span>
+	<span id="timecounter_span" class="w3-large hidden-text" style="padding-left:50px; display: none;">持续时间：<label id="timecounter"></label></span>
 	<input name="starttime" value="" type="hidden">
 </div>
 
