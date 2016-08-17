@@ -18,6 +18,7 @@ import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.FieldAccessExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
@@ -82,6 +83,13 @@ public class CodeAnalyzer {
 					{
 						cp.addDeclaration(v.getId().getName(), n.getType().toString());
 					}
+					super.visit(n, arg);
+				}
+				
+				@Override
+				public void visit(final FieldAccessExpr n, final Void arg)
+				{
+					//System.out.println(n);
 					super.visit(n, arg);
 				}
 				

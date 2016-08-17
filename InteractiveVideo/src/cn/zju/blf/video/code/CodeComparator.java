@@ -39,7 +39,7 @@ public class CodeComparator {
 			List<String> t = new ArrayList<String>();
 			for(String s : v2)
 			{
-				t.add(s + "(" + completeVariableType(c2.getVariables().get(s), c2.getImports()) + ")");
+				t.add(s + "[" + completeVariableType(c2.getVariables().get(s), c2.getImports()) + "]");
 				c2.getVariables().get(s);
 			}
 			res.add(new CodeOperation("add", "Variable", String.join(",", t)));
@@ -52,7 +52,7 @@ public class CodeComparator {
 			List<String> t = new ArrayList<String>();
 			for(String s : v1)
 			{
-				t.add(s + "(" + completeVariableType(c1.getVariables().get(s), c1.getImports()) + ")");
+				t.add(s + "[" + completeVariableType(c1.getVariables().get(s), c1.getImports()) + "]");
 				c1.getVariables().get(s);
 			}
 			res.add(new CodeOperation("delete", "Variable", String.join(",", t)));
@@ -69,7 +69,7 @@ public class CodeComparator {
 			List<String> t = new ArrayList<String>();
 			for(String s : d2)
 			{
-				t.add(s + "(" + c2.getDeclaration().get(s) + ")");
+				t.add(s + "[" + c2.getDeclaration().get(s) + "]");
 				c2.getDeclaration().get(s);
 			}
 			res.add(new CodeOperation("add", "Field", String.join(",", t)));
@@ -82,7 +82,7 @@ public class CodeComparator {
 			List<String> t = new ArrayList<String>();
 			for(String s : d1)
 			{
-				t.add(s + "(" + c1.getDeclaration().get(s) + ")");
+				t.add(s + "[" + c1.getDeclaration().get(s) + "]");
 				c1.getDeclaration().get(s);
 			}
 			res.add(new CodeOperation("delete", "Field", String.join(",", t)));

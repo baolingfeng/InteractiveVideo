@@ -227,14 +227,14 @@ function getExpressionHtml(expr, type)
 		for(var i=0; i<arr.length; i++)
 		{
 			idx1 = arr[i].lastIndexOf('.');
-			idx2 = arr[i].indexOf('(');
-			idx3 = arr[i].indexOf(')');
+			idx2 = arr[i].indexOf('[');
+			idx3 = arr[i].indexOf(']');
 			
 			if(idx2 > 0)
 			{
 				str +=  arr[i].substring(0, idx2+1);
 				str += '<span class="import">' + arr[i].substring(idx2+1, idx3) + '</span>';
-				str += ').<span class="api" import="' + arr[i].substring(idx2+1, idx3) +'">' + arr[i].substring(idx1+1) + '</span>';
+				str += '].<span class="api" import="' + arr[i].substring(idx2+1, idx3) +'">' + arr[i].substring(idx1+1) + '</span>';
 				str += '<br/>'
 			}
 			else{
@@ -260,11 +260,11 @@ function getExpressionHtml(expr, type)
 		var arr = expr.split(',');
 		for(var i=0; i<arr.length; i++)
 		{
-			idx1 = arr[i].indexOf('(');
-			idx2 = arr[i].indexOf(')');
+			idx1 = arr[i].indexOf('[');
+			idx2 = arr[i].indexOf(']');
 			
 			str += arr[i].substring(0, idx1+1);
-			str += '<span class="import">' + arr[i].substring(idx1+1, idx2) + '</span>)'
+			str += '<span class="import">' + arr[i].substring(idx1+1, idx2) + '</span>]'
 			str += '<br/>'
 		}
 	}

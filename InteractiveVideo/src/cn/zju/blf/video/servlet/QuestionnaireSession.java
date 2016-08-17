@@ -71,7 +71,7 @@ public class QuestionnaireSession extends HttpServlet {
 		}
 		else  if("reset".equals(type))
 		{
-			session.removeAttribute("starttime");
+			session.removeAttribute(video+"starttime");
 			
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");

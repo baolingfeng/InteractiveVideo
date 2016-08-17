@@ -88,16 +88,16 @@ public class CodePatch {
 			if(variables.containsKey(var))
 			{
 				String type = variables.get(var);
-				pre += "(";
+				pre += "[";
 				pre += "".equals(getImport(type)) ? type : getImport(type);
-				pre += ")";
+				pre += "]";
 			}
 			else if(declaration.containsKey(var))
 			{
 				String type = declaration.get(var);
-				pre += "(";
+				pre += "[";
 				pre += "".equals(getImport(type)) ? type : getImport(type);
-				pre += ")";
+				pre += "]";
 			}
 			
 			for(String c : calls)
