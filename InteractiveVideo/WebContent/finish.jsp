@@ -25,7 +25,7 @@ if (session != null) {
 <div class="w3-padding-jumbo w3-light-grey">
 	<h1>感谢你的参与！</h1>
 	<label class="w3-large italic-text">
-	参与这个实验我们将赠送价值50元左右的U盘，非常感谢你的参与。
+	输入你的手机号码，我们过段时间会将50元话费冲到你的手机上，非常感谢你的参与。
 	<br/>
 	<span id="info">
 	<input class="underline-input w3-light-grey " name="useremail" size="100" placeholder="请在此输入"></input>
