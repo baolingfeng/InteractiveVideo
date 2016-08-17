@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>Interactive Video Demo</title>
 <link rel="stylesheet" media="all" href="css/style.css" />
+<link rel="stylesheet" media="all" href="css/questionnaire.css" />
 
 <link href="js/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="js/codemirror.css" /> 	
@@ -66,7 +67,10 @@ table.vtable td, th {
 </div>
 
 <div id="videolist">
-	<div><h1>Video List</h1></div>
+	<div>
+		<h1>Video List</h1>
+		<span><a class="w3-red" href="howto.jsp?group=1" target="_blank">请查看问卷和工具介绍</a></span>
+	</div>
 	<table class="vtable">
 	<tr>
 		<th>Video Name</th>

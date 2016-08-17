@@ -36,15 +36,15 @@
 			<h3>实验步骤</h3>
 			<ul>
 			<li>在问卷页面，点击“打开视频并开始答题”按钮，会弹出另外一个页面（<span class="w3-red">如果浏览器屏蔽弹窗，请允许打开</span>），展示需要看的编程教学视频。</li>
-			<li>教学视频有解说，需要打开声音</li>
+			<li><span style="color:red;">教学视频有解说，观看时最好打开声音，如果没有声音，可以从视频中的文字标注理解当前视频播放的内容</span></li>
 			<li>开始后，请不要关闭问卷页面和视频页面</li>
-			<li>问卷上问题的答案一般都可以通过观看视频找到，可以边看视频边回答问卷</li>
+			<li>问卷上问题的答案需要从观看的视频中寻找，可以边看视频边回答问卷</li>
 			<li>完成所有问题后点击“提交”按钮，完成问卷</li>
 			</ul>
 		
 		<%if("1".equals(group)){ %>
 		
-		<span style="background-color: yellow;">图片说明：</span>
+		<span style="background-color: yellow;">InteractiveVideo功能说明（实验组需要了解）：</span>
 		<div class="flexslider" style="width: 1240px;">
 		  <ul class="slides">
 		    <li>
@@ -62,7 +62,7 @@
 		  </ul>
 		</div>
 		
-		<span style="background-color: yellow;">实验组请先看一下下面一个简短的视频了解下我们的工具； 你们可以利用我们的工具更快更好的完成问卷。</span>
+		<span style="background-color: yellow;">（实验组需要了解）下面一个简短的视频说明了我们工具的功能； 你们可以利用我们的工具更快更好的完成问卷。</span>
 		
 		
 		<div id="video_content">
