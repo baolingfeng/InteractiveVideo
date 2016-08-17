@@ -142,14 +142,14 @@ $(document).ready(function(){
 	</label>
 </div>
 
-<div class="w3-padding-jumbo w3-light-grey">
+<div class="w3-padding-jumbo w3-light-grey hidden-text">
 	<input id="controlBtn" name="controlBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 打开视频并开始答题 " type="button" onclick="startAnswer(questionNumber, this.value, '<%=videoName%>', '<%=group%>')">
 	<span id="timecounter_span" class="w3-large" style="padding-left:50px; display: none;">持续时间：<label id="timecounter"></label></span>
 	<input name="starttime" value="" type="hidden">
 </div>
 
 <div class="w3-padding-jumbo w3-light-grey hidden-text overall-warning">
-<h3 style="color: red;">所有问题都必须回答！</h3>
+<h3 class="w3c-large w3-yellow">所有选择题都必须回答，填空题可以不答！</h3>
 </div>
 
 <%if("email".equals(videoName)){ %>

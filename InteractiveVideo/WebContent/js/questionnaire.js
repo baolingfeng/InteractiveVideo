@@ -202,6 +202,7 @@ function submitQuestionnaire(n, videoName, group)
 	else
 	{
 		$(".overall-warning").removeClass("hidden-text");
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 }
 
