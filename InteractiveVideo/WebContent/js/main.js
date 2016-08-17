@@ -440,7 +440,7 @@ function generateFileContent()
 			showJavadoc(selectedText, '', 'true');
 		});
 		
-		editor.setSize(900, 700);
+		editor.setSize(screen_width * 0.5, screen_height * 0.6);
 		
 		fileEditor[fileset[i]] = editor;
 	}
