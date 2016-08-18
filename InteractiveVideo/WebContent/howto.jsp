@@ -38,13 +38,14 @@
 			<li>在问卷页面，点击“打开视频并开始答题”按钮，会弹出另外一个页面（<span class="w3-red">如果浏览器屏蔽弹窗，请允许打开</span>），展示需要看的编程教学视频。</li>
 			<li><span style="color:red;">教学视频有解说，观看时最好打开声音，如果没有声音，可以从视频中的文字标注理解当前视频播放的内容</span></li>
 			<li>开始后，请不要关闭问卷页面和视频页面</li>
-			<li>问卷上问题的答案需要从观看的视频中寻找，可以边看视频边回答问卷</li>
+			<li>开始实验后，可以根据问题去视频中寻找答案，实验组记得利用我们的工具。</li>
 			<li>完成所有问题后点击“提交”按钮，完成问卷</li>
 			</ul>
 		
 		<%if("1".equals(group)){ %>
 		
-		<span style="background-color: yellow;">InteractiveVideo功能说明（实验组需要了解）：</span>
+		<span style="background-color: yellow;">InteractiveVideo功能说明（实验组需要了解）：</span><br/>
+		<span style="color:red;">tips：实现组可以根据问题，用我们的工具快速定位到视频相关的位置，还可以查看某些API的文档。</span>
 		<div class="flexslider" style="width: 1240px;">
 		  <ul class="slides">
 		    <li>

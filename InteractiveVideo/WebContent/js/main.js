@@ -673,7 +673,7 @@ function search(query)
 			if(file1.toLowerCase().indexOf(query) >= 0 || file2.toLowerCase().indexOf(query) >= 0)
 			{
 				var expr = 'Switch File from <span class="file">' + file2 + '</span>';
-				expr += 'to <span class="file">' + file1 + '</span>';
+				expr += ' to <span class="file">' + file1 + '</span>';
 				res.push({'interval': e.interval, 'expr': expr});
 			}
 		}
