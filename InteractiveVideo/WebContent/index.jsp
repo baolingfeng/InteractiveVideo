@@ -69,7 +69,6 @@ table.vtable td, th {
 <div id="videolist">
 	<div>
 		<h1>Video List</h1>
-		<span><a class="w3-red" href="howto.jsp?group=1" target="_blank">请查看问卷和工具介绍</a></span>
 	</div>
 	<table class="vtable">
 	<tr>
