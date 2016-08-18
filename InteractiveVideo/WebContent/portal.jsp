@@ -3,6 +3,11 @@
 <%@ page import="cn.zju.blf.video.VideoMetadataManager" %>
 <%@ page import="java.util.Set" %>
 
+<%
+	String group = request.getParameter("group");
+	String v = request.getParameter("v");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,7 +74,7 @@ table.vtable td, th {
 <div id="videolist">
 	<div>
 		<h1>Video List</h1>
-		<span><a class="w3-red" href="howto.jsp?group=1" target="_blank">请查看问卷和工具介绍</a></span>
+		
 	</div>
 	<table class="vtable">
 	<tr>
@@ -79,19 +84,28 @@ table.vtable td, th {
 	</tr>
 	<%
 		Set<String> videoList = VideoMetadataManager.getInstance().getVideoList();
-		for(String v: videoList)
+		for(String video: videoList)
 		{
+			if("1".equals(v) && "plugin".equals(video))
+			{
+				 continue;
+			}
+			else if("2".equals(v) && ("email".equals(video) || "mysql".equals(video)))
+			{
+				continue;
+			}
 	%>
 	<tr>
-		<td><%=v%></td>
-		<td><%=VideoMetadataManager.getInstance().getTitle(v)%></td>
+		<td><%=video%></td>
+		<td><%=VideoMetadataManager.getInstance().getTitle(video)%></td>
 		<td>
-			<a href="/InteractiveVideo/PortalServlet?name=<%=v%>&group=1" target="_blank">open</a>
-			<a href="/InteractiveVideo/PortalServlet?name=<%=v%>&group=2" target="_blank">B组</a>
+			<a href="/InteractiveVideo/PortalServlet?name=<%=video%>&group=<%=group%>" target="_blank">open</a>
 		</td>
 	</tr>
 	<%}%>
 	</table>
+	<br/>
+	<span><a class="w3-red" href="howto.jsp?group=<%=group%>" target="_blank">请查看实验介绍</a></span>
 </div>
 
 <div id="footer">Copyright @ lingfengbao@zju.edu.cn</div>
