@@ -89,7 +89,7 @@ var recordId = <%=recordId %>;
 	</div>
 	
 	<div class="w3-padding-jumbo w3-light-grey">
-		<input id="controlBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 提交 " type="button" onclick="submitRate(recordId)">
+		<input id="controlBtn" class="w3-btn w3-orange w3-large w3-text-white" value=" 提交 " type="button" onclick="submitRate(recordId, 4)">
 	</div>
 </div>
 </body>

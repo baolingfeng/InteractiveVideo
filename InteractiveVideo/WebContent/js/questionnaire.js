@@ -222,11 +222,11 @@ function startAnswer(n, button, videoName, group)
 	
 }
 
-function submitRate(recordId)
+function submitRate(recordId, rnum)
 {
 	var canSubmit = true;
 	var rates = []
-	for(i=1; i<=4; i++)
+	for(i=1; i<=rnum; i++)
 	{
 		var res = $("input[name=r" + i + "]:checked");
 		console.log(res);

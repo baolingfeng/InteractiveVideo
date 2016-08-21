@@ -144,13 +144,13 @@
 		<label class="w3-large"><input name="q7" id="4" value="4" type="checkbox"> setText</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q7" id="4" value="4" type="checkbox"> doSave</label>
+		<label class="w3-large"><input name="q7" id="5" value="5" type="checkbox"> doSave</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q7" id="5" value="5" type="checkbox"> doSaveAs</label>
+		<label class="w3-large"><input name="q7" id="6" value="6" type="checkbox"> doSaveAs</label>
 	</div>
 	<div class="radio">
-		<label class="w3-large"><input name="q7" id="6" value="6" type="checkbox"> isDirty</label>
+		<label class="w3-large"><input name="q7" id="7" value="7" type="checkbox"> isDirty</label>
 	</div>
 </div>
 
