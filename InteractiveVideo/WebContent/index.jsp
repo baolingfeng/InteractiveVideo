@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Interactive Video Demo</title>
+<title>VT-Revolution - Interactive Programming Video Tutorial Authoring and Watching System</title>
 <link rel="stylesheet" media="all" href="css/style.css" />
 <link rel="stylesheet" media="all" href="css/questionnaire.css" />
 
@@ -63,7 +63,7 @@ table.vtable td, th {
 </head>
 <body>
 <div id="header">
-<h1>Interactive Tutorial Video</h1>
+<h1>VT-Revolution</h1>
 </div>
 
 <div id="videolist">

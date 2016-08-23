@@ -284,6 +284,50 @@ tr:last-child {
 	width: 400px;
 }
 
+.filterbox{
+	border: 1px, #000000;
+	font-family: Verdana,sans-serif;
+	font-feature-settings: normal;
+	font-kerning: auto;
+	font-language-override: normal;
+	font-size: 18px;
+	font-size-adjust: none;
+	font-stretch: normal;
+	font-style: normal;
+	font-synthesis: weight style;
+	font-variant: normal;
+	font-variant-alternates: normal;
+	font-variant-caps: normal;
+	font-variant-east-asian: normal;
+	font-variant-ligatures: normal;
+	font-variant-numeric: normal;
+	font-variant-position: normal;
+	font-weight: 400;
+	line-height: 22.5px;
+	margin-bottom: 16px;
+	margin-left: 20px;
+	margin-right: 0px;
+	margin-top: 0px;
+	outline-color: rgb(255, 255, 255);
+	outline-style: none;
+	outline-width: 0px;
+	padding-bottom: 8px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 8px;
+	text-decoration: none;
+	text-decoration-color: rgb(255, 255, 255);
+	text-decoration-line: none;
+	text-decoration-style: solid;
+	text-transform: none;
+	transition-delay: 0s, 0s, 0s, 0s;
+	transition-duration: 0.3s, 0.15s, 0.3s, 0.3s;
+	transition-property: background-color, color, box-shadow, opacity;
+	transition-timing-function: ease, ease, ease, ease;
+	vertical-align: middle;
+	width: 200px;
+}
+
 .openbtn{
 	background-color: rgb(76, 175, 80);
 	border-bottom-color: rgb(255, 255, 255);

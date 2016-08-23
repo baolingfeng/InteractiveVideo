@@ -181,7 +181,110 @@ $(document).ready(function(){
             search(this.value);
         }
     });
+    
+    $("[name='filter']").keyup(function(event) {
+    	console.log('filter: ' + this.value);
+    	
+    	if(this.value.trim() == "")
+    	{
+    		for(i=0; i<events.length; i++)
+    		{
+    			$('#tbl_events').find("[eventidx=" + i + "]").each(function(){
+    				$(this).css('display', '');
+    			});
+    		}
+    		return;
+    	}
+    	
+    	filter(this.value);
+    });
+    
 });
+
+function filter(query)
+{
+	query = query.toLowerCase();
+	
+	for(i=0; i<events.length; i++)
+	{ 
+		isShow = false;
+		e = events[i];
+		if(e.summary.hasOwnProperty('codechanges'))
+		{
+			var len = e.summary.codechanges.length;
+			for(j=0; j<len; j++)
+			{
+				var operation = e.summary.codechanges[j].operation;
+				var type = e.summary.codechanges[j].type;
+				var expr = e.summary.codechanges[j].expression;
+				
+				arr = expr.split(',');
+				for(k=0; k<arr.length; k++)
+				{
+					if(arr[k].toLowerCase().indexOf(query) >= 0)
+					{
+						isShow = true; 
+						break;
+					}
+				}
+			}
+		}
+		else if(e.summary.hasOwnProperty('normalfilediff'))
+		{
+			var fileName = e.summary.normalfile;
+			if(fileName.toLowerCase().indexOf(query) >= 0)
+			{
+				isShow = true; 
+			}
+		}
+		else if(e.summary.hasOwnProperty('openfile'))
+		{
+			var file = e.summary.openfile;
+			if(file.toLowerCase().indexOf(query) >= 0)
+			{
+				isShow = true; 
+			}
+		}
+		else if(e.summary.hasOwnProperty('switchfile'))
+		{
+			var file1 = e.summary.switchfile;
+			var file2 = e.summary.switchfilefrom;
+			if(file1.toLowerCase().indexOf(query) >= 0 || file2.toLowerCase().indexOf(query) >= 0)
+			{
+				isShow = true; 
+			}
+		}
+		else if(e.summary.hasOwnProperty('console'))
+		{
+			var consoleInfo = e.summary.console;
+			if(consoleInfo.toLowerCase().indexOf(query) >= 0)
+			{
+				arr = consoleInfo.split(',');
+				for(k=0; k<arr.length; k++)
+				{
+					if(arr[k].toLowerCase().indexOf(query) >= 0)
+					{
+						isShow = true; 
+						break;
+					}
+				}
+			}
+		}
+		
+		$('#tbl_events').find("[eventidx=" + i + "]").each(function(){
+			if(isShow)
+			{
+				$(this).css('display', '');
+			}
+			else
+			{
+				$(this).css('display', 'none');
+			}
+		});
+		
+	}
+	console.log(i);
+}
 
 function highlight(hIdx)
 {

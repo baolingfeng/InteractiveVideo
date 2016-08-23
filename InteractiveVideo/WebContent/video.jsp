@@ -73,6 +73,7 @@ String video = VideoMetadataManager.getInstance().getVideo(videoName);
 </div>
 
 <div id="mySidenav" class="sidenav">
+	  <input class="filterbox" type="text" name="filter" placeholder="filter action" value=""/>
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 	  <div id="display" style="width: 100%; height: 90%; overflow-y: scroll;">
 	  	<table id="tbl_events" style="width: 100%">
