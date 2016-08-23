@@ -48,7 +48,7 @@ function submitEmail()
 	
 	$.ajax({
 		type: 'post',
-		url: '/InteractiveVideo/SubmitEmail',
+		url: '/VTRevolution/SubmitEmail',
 		data: {'recordId': recordId, 'email': email},
 		success: function(d){
 			console.log(d);

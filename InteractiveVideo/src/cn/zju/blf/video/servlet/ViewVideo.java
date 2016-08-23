@@ -38,11 +38,11 @@ public class ViewVideo extends HttpServlet {
 		
 		if("1".equals(group))
 		{
-			response.sendRedirect("/InteractiveVideo/video.jsp?name="+videoName);
+			response.sendRedirect("/VTRevolution/video.jsp?name="+videoName);
 		}
 		else
 		{
-			response.sendRedirect("/InteractiveVideo/video2.jsp?name="+videoName);
+			response.sendRedirect("/VTRevolution/video2.jsp?name="+videoName);
 		}
 		
 	}

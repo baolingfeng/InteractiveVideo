@@ -103,7 +103,7 @@ $(document).ready(function(){
 
 <div class="w3-padding-jumbo w3-light-grey">
 	<h2>
-	这个调查问卷是你需要观看<a href="/InteractiveVideo/ViewVideo?name=<%=videoName%>&group=<%=group%>" target="_blank"><%=VideoMetadataManager.getInstance().getTitle(videoName) %></a>的这个视频后完成
+	这个调查问卷是你需要观看<a href="/VTRevolution/ViewVideo?name=<%=videoName%>&group=<%=group%>" target="_blank"><%=VideoMetadataManager.getInstance().getTitle(videoName) %></a>的这个视频后完成
 	</h2>
 	<br/><br/>
 	<label class="w3-large">

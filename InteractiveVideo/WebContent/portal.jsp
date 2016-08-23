@@ -99,7 +99,7 @@ table.vtable td, th {
 		<td><%=video%></td>
 		<td><%=VideoMetadataManager.getInstance().getTitle(video)%></td>
 		<td>
-			<a href="/InteractiveVideo/PortalServlet?name=<%=video%>&group=<%=group%>" target="_blank">open</a>
+			<a href="/VTRevolution/PortalServlet?name=<%=video%>&group=<%=group%>" target="_blank">open</a>
 		</td>
 	</tr>
 	<%}%>

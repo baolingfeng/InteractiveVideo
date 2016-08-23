@@ -24,7 +24,7 @@ public class GetFocusUIImage extends HttpServlet {
     
 	private Logger logger = Logger.getLogger(GetFocusUIImage.class);
 	
-	public static final String IMAGE_FOLDER = "C:/baolingfeng/research/InteractiveVideo/data/example4/log/screen/";
+	public static final String IMAGE_FOLDER = "C:/baolingfeng/research/VTRevolution/data/example4/log/screen/";
 	
     /**
      * @see HttpServlet#HttpServlet()

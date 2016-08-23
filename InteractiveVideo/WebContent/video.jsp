@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import="cn.zju.blf.video.VideoMetadataManager" %>
 <%@ page import="java.util.List" %>
+<%
+String videoName = request.getParameter("name");
+String video = VideoMetadataManager.getInstance().getVideo(videoName);
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,7 +17,7 @@
 <link rel="stylesheet" href="js/codemirror.css" /> 	
 <link rel="stylesheet" href="js/jquery-ui.min.css">
 
-<title>Interactive Video Demo</title>
+<title>VT-Revolution</title>
 
 <script src="js/jquery-3.0.0.min.js"></script>
 <script src="js/jquery.contextMenu.js" type="text/javascript"></script>
@@ -25,17 +29,12 @@
 <script src="charts/loader.js"></script>
 
 </head>
-<%
-String videoName = request.getParameter("name");
-String video = VideoMetadataManager.getInstance().getVideo(videoName);
 
-
-%>
 
 <body>
 <div id="main">
 	<div id="header">
-	<h1>Interactive Tutorial Video</h1>
+	<h1>Interactive Programming Video Tutorial</h1>
 	</div>
 	
 	<div id="video_content">

@@ -43,17 +43,17 @@ public class PortalServlet extends HttpServlet {
 		
 		if(toQustionnaire)
 		{
-			response.sendRedirect("/InteractiveVideo/questionnaire.jsp?name=" + video + "&group=" + group);
+			response.sendRedirect("/VTRevolution/questionnaire.jsp?name=" + video + "&group=" + group);
 		}
 		else
 		{
 			if("1".equals(group))
 			{
-				response.sendRedirect("/InteractiveVideo/video.jsp?name=" + video);
+				response.sendRedirect("/VTRevolution/video.jsp?name=" + video);
 			}
 			else
 			{
-				response.sendRedirect("/InteractiveVideo/video2.jsp?name=" + video);
+				response.sendRedirect("/VTRevolution/video2.jsp?name=" + video);
 			}
 			
 		}

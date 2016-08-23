@@ -6,7 +6,7 @@ function initQuestionnaire()
 	$.ajax({
 		type: 'post',
 		contentType: "application/json",
-		url: '/InteractiveVideo/QuestionnaireSession?type=get&video='+videoName,
+		url: '/VTRevolution/QuestionnaireSession?type=get&video='+videoName,
 		success: function(d){
 			console.log(d);
 			
@@ -74,11 +74,11 @@ function beginAnswer(n, videoName, group)
 	$.ajax({
 		type: 'post',
 		contentType: "application/json",
-		url: '/InteractiveVideo/QuestionnaireSession?type=set&starttime='+starttime.toISOString().slice(0, 19) + '&video='+videoName,
+		url: '/VTRevolution/QuestionnaireSession?type=set&starttime='+starttime.toISOString().slice(0, 19) + '&video='+videoName,
 		success: function(d){
 			console.log(d);
 			
-			window.open("/InteractiveVideo/ViewVideo?name="+videoName+"&group="+group, "_blank");
+			window.open("/VTRevolution/ViewVideo?name="+videoName+"&group="+group, "_blank");
 		}
 	});
 }
@@ -172,7 +172,7 @@ function submitQuestionnaire(n, videoName, group)
 		$(".overall-warning").addClass("hidden-text");
 		$.ajax({
 			type: 'post',
-			url: '/InteractiveVideo/SubmitQuestionnaire',
+			url: '/VTRevolution/SubmitQuestionnaire',
 			data: {"answers": JSON.stringify(answers)},
 			beforeSend: function() {
 		       console.log("submitting...")
@@ -246,7 +246,7 @@ function submitRate(recordId, rnum)
 	{
 		$.ajax({
 			type: 'post',
-			url: '/InteractiveVideo/SubmitRate',
+			url: '/VTRevolution/SubmitRate',
 			data: {'recordId': recordId, 'rate': rates.join(','), 'comment': comment},
 			beforeSend: function() {
 		       console.log("submitting rate.....")
@@ -343,7 +343,7 @@ function resetAnswer(n, videoName, group)
 	$.ajax({
 		type: 'post',
 		contentType: "application/json",
-		url: '/InteractiveVideo/QuestionnaireSession?type=reset&video='+videoName,
+		url: '/VTRevolution/QuestionnaireSession?type=reset&video='+videoName,
 		success: function(d){
 			console.log(d);
 			

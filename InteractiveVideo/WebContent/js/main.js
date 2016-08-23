@@ -40,7 +40,7 @@ $(document).ready(function(){
 	$.ajax({
 		type: 'post',
 		contentType: "application/json",
-		url: '/InteractiveVideo/GetVideoData?video='+videoName,
+		url: '/VTRevolution/GetVideoData?video='+videoName,
 		error: function(xhr, status, error) {
 			var err = eval("(" + xhr.responseText + ")");
 			alert(err.Message);
@@ -850,7 +850,7 @@ function showJavadoc(clsName, method, flag){
 	
 	$.ajax({
 		type: 'post',
-		url: '/InteractiveVideo/GetJavadoc',
+		url: '/VTRevolution/GetJavadoc',
 		data: {
 			'class': clsName,
 			'method': method,

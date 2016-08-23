@@ -30,7 +30,7 @@ body{position: relative; min-height: 550px;}
 
 #videolist {
 	height: 75%;
-	width: 600px;
+	width: 800px;
     margin: 0 auto;
     padding-top: 100px;
 }
@@ -68,13 +68,16 @@ table.vtable td, th {
 
 <div id="videolist">
 	<div>
-		<h1>Video List</h1>
+		<span style="font-size: 26px; font-weight: bold;">Video List</span>
+		<span>(<a style="color: red;" href="demo.jsp" target="_blank">Demonstration</a>)</span>
 	</div>
+	<br/>
 	<table class="vtable">
 	<tr>
 		<th>Video Name</th>
 		<th>Description</th>
-		<th>Open</th>
+		<th style="text-align: center;">View</th>
+		<th style="text-align: center;">Questionnaire</th>
 	</tr>
 	<%
 		Set<String> videoList = VideoMetadataManager.getInstance().getVideoList();
@@ -84,13 +87,23 @@ table.vtable td, th {
 	<tr>
 		<td><%=v%></td>
 		<td><%=VideoMetadataManager.getInstance().getTitle(v)%></td>
-		<td>
-			<a href="/InteractiveVideo/video.jsp?name=<%=v%>" target="_blank">view</a>
+		<td style="text-align: center;">
+			<a href="video.jsp?name=<%=v%>" target="_blank">
+			<img src="images/play.png" alt="Play with VT-Revolution" title="Play with VT-Revolution"/>
+			</a>
+		</td>
+		<td style="text-align: center;">
+			<a href="questionnaire.jsp?name=<%=v%>&group=1" target="_blank">
+			<img src="images/questionnaire.png" alt="View Questionnaire" title="View Questionniare (Chinese Version)"/>
+			</a>
 		</td>
 	</tr>
 	<%}%>
 	</table>
+	<br/>
+	
 </div>
+
 
 <div id="footer">Copyright @ lingfengbao@zju.edu.cn</div>
 
