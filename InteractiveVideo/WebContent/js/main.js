@@ -28,6 +28,8 @@ $(document).ready(function(){
 	$('#search').popup();
 	$('#dialog').popup();
 	
+	//$( "#filterselect" ).selectmenu();
+	
 	var v = document.getElementById('v');
 	v.addEventListener("loadedmetadata", function() { 
 		if(typeof(VTTCue) != "undefined")
@@ -115,6 +117,16 @@ $(document).ready(function(){
 	            }
 			});
 			
+			for(var i=0; i<fileset.length; i++)
+		    {
+		    	console.log('add filter select:' + fileset[i])
+		    	$('#checkboxes').append('<label><input type="checkbox" name="filter" value="' + fileset[i] + '"/>' + fileset[i] +'</label>');
+		    }
+			
+			$('[name="filter"]').change(function() {
+//				console.log(this.value + ',' + $(this).is(":checked"));
+				filter();
+			});
 		}
 	});
 	
@@ -181,29 +193,27 @@ $(document).ready(function(){
             search(this.value);
         }
     });
-    
-    $("[name='filter']").keyup(function(event) {
-    	console.log('filter: ' + this.value);
-    	
-    	if(this.value.trim() == "")
-    	{
-    		for(i=0; i<events.length; i++)
-    		{
-    			$('#tbl_events').find("[eventidx=" + i + "]").each(function(){
-    				$(this).css('display', '');
-    			});
-    		}
-    		return;
-    	}
-    	
-    	filter(this.value);
-    });
-    
 });
 
-function filter(query)
+function filter()
 {
-	query = query.toLowerCase();
+	filters = []
+	$('[name="filter"]').each(function(){
+		if($(this).is(":checked"))
+		{
+			filters.push(this.value);
+		}
+	});
+	
+	console.log(filters);
+	if(filters.length == 0)
+	{
+		$('#tbl_events tr').each(function(){
+			$(this).css('display', '');
+		});
+		
+		return;
+	}
 	
 	for(i=0; i<events.length; i++)
 	{ 
@@ -212,63 +222,53 @@ function filter(query)
 		if(e.summary.hasOwnProperty('codechanges'))
 		{
 			var len = e.summary.codechanges.length;
+			
 			for(j=0; j<len; j++)
 			{
-				var operation = e.summary.codechanges[j].operation;
 				var type = e.summary.codechanges[j].type;
-				var expr = e.summary.codechanges[j].expression;
-				
-				arr = expr.split(',');
-				for(k=0; k<arr.length; k++)
+				if(filters.indexOf(type) >= 0)
 				{
-					if(arr[k].toLowerCase().indexOf(query) >= 0)
-					{
-						isShow = true; 
-						break;
-					}
+					isShow = true;
+					break;
 				}
+			}
+			
+			var filename = e.summary.codepatch.fileName;
+			if(filters.indexOf(filename) >= 0)
+			{
+				isShow = true;
 			}
 		}
 		else if(e.summary.hasOwnProperty('normalfilediff'))
 		{
 			var fileName = e.summary.normalfile;
-			if(fileName.toLowerCase().indexOf(query) >= 0)
+			if(filters.indexOf('fileedit') >= 0 || filters.indexOf(fileName) >= 0)
 			{
 				isShow = true; 
 			}
 		}
 		else if(e.summary.hasOwnProperty('openfile'))
 		{
-			var file = e.summary.openfile;
-			if(file.toLowerCase().indexOf(query) >= 0)
+			var fileName = e.summary.openfile;
+			if(filters.indexOf('fileopen') >= 0 || filters.indexOf(fileName) >= 0)
 			{
 				isShow = true; 
 			}
+			
 		}
 		else if(e.summary.hasOwnProperty('switchfile'))
 		{
 			var file1 = e.summary.switchfile;
 			var file2 = e.summary.switchfilefrom;
-			if(file1.toLowerCase().indexOf(query) >= 0 || file2.toLowerCase().indexOf(query) >= 0)
+			if(filters.indexOf('fileswtich') >= 0 || filters.indexOf(file1) >= 0 
+					|| filters.indexOf(file2) >= 0)
 			{
 				isShow = true; 
 			}
 		}
-		else if(e.summary.hasOwnProperty('console'))
+		else if(e.summary.hasOwnProperty('console') && filters.indexOf("exception") >= 0)
 		{
-			var consoleInfo = e.summary.console;
-			if(consoleInfo.toLowerCase().indexOf(query) >= 0)
-			{
-				arr = consoleInfo.split(',');
-				for(k=0; k<arr.length; k++)
-				{
-					if(arr[k].toLowerCase().indexOf(query) >= 0)
-					{
-						isShow = true; 
-						break;
-					}
-				}
-			}
+			isShow = true; 
 		}
 		
 		$('#tbl_events').find("[eventidx=" + i + "]").each(function(){
@@ -281,9 +281,7 @@ function filter(query)
 				$(this).css('display', 'none');
 			}
 		});
-		
 	}
-	console.log(i);
 }
 
 function highlight(hIdx)
@@ -479,7 +477,7 @@ function generateTR(e, i)
 	}
 	
 	//console.log(cueStr);
-	if(typeof(VTTCue) != "undefined")
+	if(typeof(VTTCue) != "undefined" && track != undefined)
 	{
 		var cue = new VTTCue(e.interval, e.interval + 3, cueStr);
 		//cue.line = 1;
@@ -1111,4 +1109,16 @@ function hsvToRgb(h, s, v) {
 	}
  
 	return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
+var expanded = false;
+function showCheckboxes() {
+    var checkboxes = document.getElementById("checkboxes");
+    if (!expanded) {
+        checkboxes.style.display = "block";
+        expanded = true;
+    } else {
+        checkboxes.style.display = "none";
+        expanded = false;
+    }
 }

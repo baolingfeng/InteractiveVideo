@@ -72,7 +72,28 @@ String video = VideoMetadataManager.getInstance().getVideo(videoName);
 </div>
 
 <div id="mySidenav" class="sidenav">
-	  <input class="filterbox" type="text" name="filter" placeholder="filter action" value=""/>
+	  <!--  <input class="filterbox" type="text" name="filter" placeholder="filter action" value=""/>-->
+	   <div class="multiselect">
+        <div class="selectBox" onclick="showCheckboxes()">
+            <select>
+                <option value="">Filter By Operations or Files</option>
+            </select>
+            <div class="overSelect"></div>
+        </div>
+        <div id="checkboxes" style="color:white;">
+        	<label>Operations</label>
+            <label><input type="checkbox" name="filter" value="fileopen"/>File Open</label>
+            <label><input type="checkbox" name="filter" value="fileswtich"/>File Switch</label>
+            <label><input type="checkbox" name="filter" value="fileedit"/>File Edit</label>
+            <label><input type="checkbox" name="filter" value="APICall"/>Add/Delete API Call</label>
+            <label><input type="checkbox" name="filter" value="Import"/>Add/Delete Import</label>
+            <label><input type="checkbox" name="filter" value="Variable"/>Add/Delete Variable</label>
+            <label><input type="checkbox" name="filter" value="Field"/>Add/Delete Field</label>
+            <label><input type="checkbox" name="filter" value="exception"/>Inspect Exception</label>
+            <label>Files</label>
+        </div>
+    </div>
+	  
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 	  <div id="display" style="width: 100%; height: 90%; overflow-y: scroll;">
 	  	<table id="tbl_events" style="width: 100%">
