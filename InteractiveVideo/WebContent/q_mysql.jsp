@@ -129,7 +129,7 @@
 -->
 
 <div class="qdiv w3-padding-jumbo disable-text">
-	<p class="w3-large" style="margin-bottom:20px;">7. 视频中调用的存储过程的运行结果是:
+	<p class="w3-large" style="margin-bottom:20px;">7. 视频中调用的存储过程的输入参数和输出参数分别是:
 	<input class="underline-input w3-light-grey " name="q7" placeholder="请在此输入"/>
 	<span name="q7_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
 	<input name="qnumber" value="7" size="25" type="hidden">
@@ -137,11 +137,19 @@
 </div>
 
 <div class="qdiv w3-padding-jumbo disable-text">
-	<p class="w3-large" style="margin-bottom:20px;">8. 在创建Statement时，可以将返回的ResultSet设置为scrollable and insensitive to updates，应如何操作
-	（<span class="w3-red w3-small">提示：这题无法在视频中找到，需要查看相关资料，实验组可以查看API Document,对照组可以使用搜索引擎搜索</span>）：<br/><br/>
-	Statement stmt = con.createStatement(<input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入"/>, <input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入"/>);<br/> 
-	ResultSet rs = stmt.executeQuery("SELECT a, b FROM TABLE2");
+	<p class="w3-large" style="margin-bottom:20px;">8. 视频中调用的存储过程的运行结果是:
+	<input class="underline-input w3-light-grey " name="q8" placeholder="请在此输入"/>
 	<span name="q8_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
 	<input name="qnumber" value="8" size="25" type="hidden">
 	<input name="q8_time" value="" size="25" type="hidden">
+</div>
+
+<div class="qdiv w3-padding-jumbo disable-text">
+	<p class="w3-large" style="margin-bottom:20px;">9. 在创建Statement时，可以将返回的ResultSet设置为scrollable and insensitive to updates，应如何操作
+	（<span class="w3-red w3-small">提示：这题无法在视频中找到，需要查看相关资料，实验组可以查看API Document,对照组可以使用搜索引擎搜索</span>）：<br/><br/>
+	Statement stmt = con.createStatement(<input class="underline-input w3-light-grey " name="q9" placeholder="请在此输入"/>, <input class="underline-input w3-light-grey " name="q9" placeholder="请在此输入"/>);<br/> 
+	ResultSet rs = stmt.executeQuery("SELECT a, b FROM TABLE2");
+	<span name="q9_warning" class="hidden-text warning-text" style="padding-left:20px">此题不能为空</span></p>
+	<input name="qnumber" value="9" size="25" type="hidden">
+	<input name="q9_time" value="" size="25" type="hidden">
 </div>

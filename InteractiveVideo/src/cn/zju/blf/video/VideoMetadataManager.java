@@ -48,7 +48,7 @@ public class VideoMetadataManager {
 //		md3.setIntro("实现如何用Java操作MySql数据库，包括：<br/>1. 执行简单的sql查询语句；<br/>2. 用preparedstatment查询数据库；"
 //				+ "<br/>3. 数据库插入并获得自增字段的值; <br/>4.如何调用存储过程。");
 		md3.setTitle("a program to illustrate four MySql Database operations");
-		md3.setIntro("实现如何用Java操作MySql数据库，包括：<br/>1. query a table using Statemen; <br/>2. query a table using PreparedStatement;"
+		md3.setIntro("MySQL operations using Java：<br/>1. query a table using Statemen; <br/>2. query a table using PreparedStatement;"
 				+ "<br/>3. insert a table then return the auto increment id;<br/>4. call a stored procedure.");
 		meta.put("mysql", md3);
 	}

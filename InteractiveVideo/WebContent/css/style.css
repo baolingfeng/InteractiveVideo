@@ -496,7 +496,8 @@ tr:last-child {
   
   
     .multiselect {
-        width: 200px;
+        width: 250px;
+        padding: 5px;
     }
     .selectBox {
         position: relative;

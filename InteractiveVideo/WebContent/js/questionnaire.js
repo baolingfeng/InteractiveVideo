@@ -1,6 +1,10 @@
 var starttime = "";
 var intervalId = null;
 
+submit_button_val1 = ' 打开视频并开始答题 ';
+submit_button_val2 = ' 提交 '
+	
+
 function initQuestionnaire()
 {
 	$.ajax({
@@ -35,7 +39,7 @@ function initQuestionnaire()
 				$("#timecounter_span").css("display", "");
 				//$("#timecounter").html(0);
 				
-				$("input[name=controlBtn]").val(" 提交 ")
+				$("input[name=controlBtn]").val(submit_button_val2)
 			}
 			else
 			{
@@ -69,7 +73,7 @@ function beginAnswer(n, videoName, group)
 	}, 1000);
 	
 	//$("#controlBtn").val(" 提交 ");
-	$("input[name=controlBtn]").val(" 提交 ");
+	$("input[name=controlBtn]").val(submit_button_val2);
 	
 	$.ajax({
 		type: 'post',
@@ -210,12 +214,12 @@ function startAnswer(n, button, videoName, group)
 {
 	console.log(button);
 	
-	if(button.trim() == "打开视频并开始答题")
+	if(button == submit_button_val1)
 	{
 		beginAnswer(n, videoName, group);
 		//服务器保存一下开始时间
 	}
-	else if(button.trim() == "提交")
+	else if(button == submit_button_val2)
 	{
 		submitQuestionnaire(n, videoName, group);
 	}
@@ -331,7 +335,7 @@ function resetQuestionPage(n)
 		$("span[name=q"+i+"_warning]").addClass("hidden-text");
 	}
 	
-	$("input[name=controlBtn]").val(" 打开视频并开始答题 ")
+	$("input[name=controlBtn]").val(submit_button_val1)
 	$("#timecounter_span").css("display", "none");
 	$(".overall-warning").addClass("hidden-text");
 	

@@ -45,9 +45,9 @@ String video = VideoMetadataManager.getInstance().getVideo(videoName);
 	</div>
 	
 	<div id="toolbar" >
-		<span><input class="searchbox" type="text" name="searchbox" placeholder="search workflow operation" value=""/></span>
-		<span class="openbtn" onclick="openNav()">Show Action Timeline</span>
-		<span class="openbtn" onclick="openNav2()">Show File Timeline</span>
+		<span><input class="searchbox" type="text" name="searchbox" placeholder="Workflow Search" value=""/></span>
+		<span class="openbtn" onclick="openNav()">Workflow Timeline</span>
+		<span class="openbtn" onclick="openNav2()">File Content View</span>
 	</div>
 	
 	<div id="intro">

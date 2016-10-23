@@ -94,7 +94,12 @@ table.vtable td, th {
 		</td>
 		<td style="text-align: center;">
 			<a href="questionnaire.jsp?name=<%=v%>&group=1" target="_blank">
-			<img src="images/questionnaire.png" alt="View Questionnaire" title="View Questionniare (Chinese Version)"/>
+			<!--<img src="images/questionnaire.png" alt="View Questionnaire" title="View Questionniare (Chinese Version)"/>-->
+			(Chinese Version)
+			</a>
+			<br/>
+			<a href="questionnaire_en.jsp?name=<%=v%>&group=1" target="_blank">
+			(English Version)
 			</a>
 		</td>
 	</tr>
